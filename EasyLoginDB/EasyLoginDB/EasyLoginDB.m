@@ -21,6 +21,15 @@
 
 #pragma mark - Object Lifecycle
 
++ (instancetype)sharedInstance {
+    static id sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [self new];
+    });
+    return sharedInstance;
+}
+
 - (instancetype)init
 {
     self = [super init];
@@ -210,7 +219,7 @@
     completionHandler(uuidsForRequestedType, nil);
 }
 
-- (void)getRegisteredRecordsOfType:(NSString*)recordType matchingAllAttributes:(NSDictionary*)attributesWithValues andCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler {
+- (void)getRegisteredRecordUUIDsOfType:(NSString*)recordType matchingAllAttributes:(NSDictionary*)attributesWithValues andCompletionHandler:(EasyLoginDBUUIDsResult_t)completionHandler {
     NSLog(@"Get regsiterred records matching all attributes %@", attributesWithValues);
     
     NSMutableArray *validUUIDs = [NSMutableArray new];
@@ -239,7 +248,7 @@
     completionHandler(validUUIDs, nil);
 }
 
-- (void)getRegisteredRecordsOfType:(NSString*)recordType matchingAnyAttributes:(NSDictionary*)attributesWithValues andCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler {
+- (void)getRegisteredRecordUUIDsOfType:(NSString*)recordType matchingAnyAttributes:(NSDictionary*)attributesWithValues andCompletionHandler:(EasyLoginDBUUIDsResult_t)completionHandler {
     NSLog(@"Get regsiterred records matching any attributes %@", attributesWithValues);
     
     NSMutableArray *validUUIDs = [NSMutableArray new];
@@ -255,7 +264,7 @@
 }
 
 - (void)getRegisteredRecordOfType:(NSString*)recordType withUUID:(NSString*)uuid andCompletionHandler:(EasyLoginDBRecordInfo_t)completionHandler {
-    NSLog(@"Get regsiterred record with UUID %@", uuid);
+    NSLog(@"Get regsiterred record of type %@ with UUID %@", recordType, uuid);
     
     NSDictionary *requestedRecord = [self getRegisteredRecordOfType:recordType withUUID:uuid];
     completionHandler(requestedRecord, nil);
