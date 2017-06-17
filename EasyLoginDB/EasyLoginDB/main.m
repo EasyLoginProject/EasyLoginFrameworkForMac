@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "EasyLoginDB.h"
+#import "ELXPCResponder.h"
 
 @interface ServiceDelegate : NSObject <NSXPCListenerDelegate>
 @end
@@ -19,10 +19,10 @@
     
     // Configure the connection.
     // First, set the interface that the exported object implements.
-    newConnection.exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(EasyLoginDBProtocol)];
+    newConnection.exportedInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ELCachingDBProtocol)];
     
     // Next, set the object that the connection exports. All messages sent on the connection to this service will be sent to the exported object to handle. The connection retains the exported object.
-    EasyLoginDB *exportedObject = [EasyLoginDB new];
+    ELXPCResponder *exportedObject = [ELXPCResponder new];
     newConnection.exportedObject = exportedObject;
     
     // Resuming the connection allows the system to deliver more incoming messages.

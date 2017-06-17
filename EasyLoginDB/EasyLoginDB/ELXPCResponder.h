@@ -1,5 +1,5 @@
 //
-//  EasyLoginXPCResponder.h
+//  ELXPCResponder.h
 //  EasyLoginDB
 //
 //  Created by Yoann Gini on 16/06/2017.
@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "EasyLoginDBProtocol.h"
+#import "ELCachingDBProtocol.h"
 
-@interface EasyLoginXPCResponder : NSObject <EasyLoginDBProtocol>
+@interface ELXPCResponder : NSObject <ELCachingDBProtocol>
 
 @end

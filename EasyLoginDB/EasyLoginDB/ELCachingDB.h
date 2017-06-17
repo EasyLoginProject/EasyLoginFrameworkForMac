@@ -1,5 +1,5 @@
 //
-//  EasyLoginDB.h
+//  ELCachingDB.h
 //  EasyLoginDB
 //
 //  Created by Yoann Gini on 07/06/2017.
@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "EasyLoginDBProtocol.h"
+#import "ELCachingDBProtocol.h"
 
 // This object implements the protocol which we have defined. It provides the actual behavior for the service. It is 'exported' by the service to make it available to the process hosting the service over an NSXPCConnection.
-@interface EasyLoginDB : NSObject <EasyLoginDBProtocol>
+@interface ELCachingDB : NSObject <ELCachingDBProtocol>
 
 + (instancetype)sharedInstance;
 

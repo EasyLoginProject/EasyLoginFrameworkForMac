@@ -1,5 +1,5 @@
 //
-//  EasyLoginDBProtocol.h
+//  ELCachingDBProtocol.h
 //  EasyLoginDB
 //
 //  Created by Yoann Gini on 07/06/2017.
@@ -14,7 +14,7 @@ typedef void (^EasyLoginDBUUIDsResult_t)(NSArray<NSString*> *results, NSError *e
 typedef void (^EasyLoginDBRecordInfo_t)(NSDictionary* record, NSError *error);
 typedef void (^EasyLoginDBErrorHandler_t)(NSError *error);
 
-@protocol EasyLoginDBProtocol
+@protocol ELCachingDBProtocol
 
 @required
 

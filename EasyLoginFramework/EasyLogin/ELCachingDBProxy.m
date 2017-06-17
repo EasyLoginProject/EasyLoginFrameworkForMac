@@ -1,23 +1,22 @@
 //
-//  EasyLoginDBProxy.m
+//  ELCachingDBProxy.m
 //  EasyLogin
 //
 //  Created by Yoann Gini on 08/06/2017.
 //  Copyright © 2017 EasyLogin. All rights reserved.
 //
 
-#import "EasyLoginDBProxy.h"
-#import <objc/runtime.h>
+#import "ELCachingDBProxy.h"
 
 
-@interface EasyLoginDBProxy ()
+@interface ELCachingDBProxy ()
 
 @property NSXPCConnection *xpcService;
 @property NSOperationQueue *operationQueue;
 
 @end
 
-@implementation EasyLoginDBProxy
+@implementation ELCachingDBProxy
 
 #pragma mark - Object Lifecycle
 
@@ -35,7 +34,7 @@
     self = [super init];
     if (self) {
         self.xpcService = [[NSXPCConnection alloc] initWithMachServiceName:@"io.easylogin.EasyLoginDB" options:NSXPCConnectionPrivileged];
-        self.xpcService.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(EasyLoginDBProtocol)];
+        self.xpcService.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ELCachingDBProtocol)];
         [self.xpcService resume];
     }
     return self;

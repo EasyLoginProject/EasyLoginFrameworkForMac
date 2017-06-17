@@ -101,7 +101,7 @@
     for (NSString *recordType in recordTypes) {
         fprintf(stdout, "Record of type: %s\n", [recordType UTF8String]);
         [[ELAsyncBlockToManageAsOperation runOnSharedQueueOperationWithAsyncTask:^(ELAsyncBlockToManageAsOperation *currentOperation) {
-            [[EasyLoginDBProxy sharedInstance] getAllRegisteredRecordsOfType:recordType
+            [[ELCachingDBProxy sharedInstance] getAllRegisteredRecordsOfType:recordType
                                                       withAttributesToReturn:@[
                                                                                @"shortname",
                                                                                @"uuid",

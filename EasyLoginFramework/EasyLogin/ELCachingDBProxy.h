@@ -1,5 +1,5 @@
 //
-//  EasyLoginDBProxy.h
+//  ELCachingDBProxy.h
 //  EasyLogin
 //
 //  Created by Yoann Gini on 08/06/2017.
@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import <EasyLogin/EasyLoginDBProtocol.h>
+#import <EasyLogin/ELCachingDBProtocol.h>
 
-@interface EasyLoginDBProxy : NSObject <EasyLoginDBProtocol>
+@interface ELCachingDBProxy : NSObject <ELCachingDBProtocol>
 
 + (instancetype)sharedInstance;
 

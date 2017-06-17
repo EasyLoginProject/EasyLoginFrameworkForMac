@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import <EasyLogin/EasyLoginDBProtocol.h>
-#import <EasyLogin/EasyLoginDBProxy.h>
+#import <EasyLogin/ELCachingDBProtocol.h>
+#import <EasyLogin/ELCachingDBProxy.h>
 #import <EasyLogin/ELAsyncBlockToManageAsOperation.h>
 

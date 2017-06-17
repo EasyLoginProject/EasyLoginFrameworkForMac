@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F87E223E1EE8760A00CB14A0 /* EasyLoginDB.m in Sources */ = {isa = PBXBuildFile; fileRef = F87E223D1EE8760A00CB14A0 /* EasyLoginDB.m */; };
+		F87E223E1EE8760A00CB14A0 /* ELCachingDB.m in Sources */ = {isa = PBXBuildFile; fileRef = F87E223D1EE8760A00CB14A0 /* ELCachingDB.m */; };
 		F87E22401EE8760A00CB14A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F87E223F1EE8760A00CB14A0 /* main.m */; };
-		F8F3A29C1EF5A04B00BE5F88 /* EasyLoginXPCResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F3A29B1EF5A04B00BE5F88 /* EasyLoginXPCResponder.m */; };
+		F8F3A29C1EF5A04B00BE5F88 /* ELXPCResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F3A29B1EF5A04B00BE5F88 /* ELXPCResponder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F87E22381EE8760A00CB14A0 /* EasyLoginDB.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = EasyLoginDB.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
-		F87E223B1EE8760A00CB14A0 /* EasyLoginDBProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyLoginDBProtocol.h; sourceTree = "<group>"; };
-		F87E223C1EE8760A00CB14A0 /* EasyLoginDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyLoginDB.h; sourceTree = "<group>"; };
-		F87E223D1EE8760A00CB14A0 /* EasyLoginDB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasyLoginDB.m; sourceTree = "<group>"; };
+		F87E223B1EE8760A00CB14A0 /* ELCachingDBProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELCachingDBProtocol.h; sourceTree = "<group>"; };
+		F87E223C1EE8760A00CB14A0 /* ELCachingDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELCachingDB.h; sourceTree = "<group>"; };
+		F87E223D1EE8760A00CB14A0 /* ELCachingDB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELCachingDB.m; sourceTree = "<group>"; };
 		F87E223F1EE8760A00CB14A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F87E22411EE8760A00CB14A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F87E22481EE8861A00CB14A0 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		F8F3A29A1EF5A04B00BE5F88 /* EasyLoginXPCResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyLoginXPCResponder.h; sourceTree = "<group>"; };
-		F8F3A29B1EF5A04B00BE5F88 /* EasyLoginXPCResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyLoginXPCResponder.m; sourceTree = "<group>"; };
+		F8F3A29A1EF5A04B00BE5F88 /* ELXPCResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELXPCResponder.h; sourceTree = "<group>"; };
+		F8F3A29B1EF5A04B00BE5F88 /* ELXPCResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELXPCResponder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +54,12 @@
 		F87E223A1EE8760A00CB14A0 /* EasyLoginDB */ = {
 			isa = PBXGroup;
 			children = (
-				F8F3A29A1EF5A04B00BE5F88 /* EasyLoginXPCResponder.h */,
-				F8F3A29B1EF5A04B00BE5F88 /* EasyLoginXPCResponder.m */,
-				F87E223B1EE8760A00CB14A0 /* EasyLoginDBProtocol.h */,
 				F87E22481EE8861A00CB14A0 /* Constants.h */,
-				F87E223C1EE8760A00CB14A0 /* EasyLoginDB.h */,
-				F87E223D1EE8760A00CB14A0 /* EasyLoginDB.m */,
+				F87E223B1EE8760A00CB14A0 /* ELCachingDBProtocol.h */,
+				F8F3A29A1EF5A04B00BE5F88 /* ELXPCResponder.h */,
+				F8F3A29B1EF5A04B00BE5F88 /* ELXPCResponder.m */,
+				F87E223C1EE8760A00CB14A0 /* ELCachingDB.h */,
+				F87E223D1EE8760A00CB14A0 /* ELCachingDB.m */,
 				F87E223F1EE8760A00CB14A0 /* main.m */,
 				F87E22411EE8760A00CB14A0 /* Info.plist */,
 			);
@@ -135,8 +135,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F87E22401EE8760A00CB14A0 /* main.m in Sources */,
-				F87E223E1EE8760A00CB14A0 /* EasyLoginDB.m in Sources */,
-				F8F3A29C1EF5A04B00BE5F88 /* EasyLoginXPCResponder.m in Sources */,
+				F87E223E1EE8760A00CB14A0 /* ELCachingDB.m in Sources */,
+				F8F3A29C1EF5A04B00BE5F88 /* ELXPCResponder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

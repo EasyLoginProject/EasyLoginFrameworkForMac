@@ -1,23 +1,23 @@
 //
-//  EasyLoginDB.m
+//  ELCachingDB.m
 //  EasyLoginDB
 //
 //  Created by Yoann Gini on 07/06/2017.
 //  Copyright © 2017 EasyLogin. All rights reserved.
 //
 
-#import "EasyLoginDB.h"
+#import "ELCachingDB.h"
 
 #import "Constants.h"
 
-@interface EasyLoginDB ()
+@interface ELCachingDB ()
 
 @property NSMutableDictionary *recordsPerTypeAndUUID;
 @property NSMutableDictionary *indexesForRecordsPerTypeAttributeAndValue;
 @property NSLock *recordsLock;
 @end
 
-@implementation EasyLoginDB
+@implementation ELCachingDB
 
 #pragma mark - Object Lifecycle
 
