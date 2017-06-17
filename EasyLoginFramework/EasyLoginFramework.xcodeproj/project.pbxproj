@@ -17,6 +17,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F86795A11EF5A8D9008FDC1B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F867959D1EF5A8D8008FDC1B /* elctl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F86795931EF5A8D8008FDC1B;
+			remoteInfo = elctl;
+		};
 		F87E226B1EE926D600CB14A0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F87E22671EE926D600CB14A0 /* EasyLoginDB.xcodeproj */;
@@ -48,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F867959D1EF5A8D8008FDC1B /* elctl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = elctl.xcodeproj; path = ../elctl/elctl.xcodeproj; sourceTree = "<group>"; };
 		F87E22531EE8AC0F00CB14A0 /* EasyLogin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyLogin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F87E22561EE8AC0F00CB14A0 /* EasyLogin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyLogin.h; sourceTree = "<group>"; };
 		F87E22571EE8AC0F00CB14A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,9 +78,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F867959E1EF5A8D8008FDC1B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F86795A21EF5A8D9008FDC1B /* elctl */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F87E22491EE8AC0E00CB14A0 = {
 			isa = PBXGroup;
 			children = (
+				F867959D1EF5A8D8008FDC1B /* elctl.xcodeproj */,
 				F87E22671EE926D600CB14A0 /* EasyLoginDB.xcodeproj */,
 				F87E22551EE8AC0F00CB14A0 /* EasyLogin */,
 				F87E22541EE8AC0F00CB14A0 /* Products */,
@@ -177,6 +194,10 @@
 					ProductGroup = F87E22681EE926D600CB14A0 /* Products */;
 					ProjectRef = F87E22671EE926D600CB14A0 /* EasyLoginDB.xcodeproj */;
 				},
+				{
+					ProductGroup = F867959E1EF5A8D8008FDC1B /* Products */;
+					ProjectRef = F867959D1EF5A8D8008FDC1B /* elctl.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -186,6 +207,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		F86795A21EF5A8D9008FDC1B /* elctl */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = elctl;
+			remoteRef = F86795A11EF5A8D9008FDC1B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		F87E226C1EE926D600CB14A0 /* EasyLoginDB.xpc */ = {
 			isa = PBXReferenceProxy;
 			fileType = "wrapper.xpc-service";
