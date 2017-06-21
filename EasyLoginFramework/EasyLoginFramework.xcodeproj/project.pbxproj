@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		F848227C1EF5B20700E6A518 /* ELCachingDBProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F848227B1EF5B20700E6A518 /* ELCachingDBProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F86795AC1EF5AE3D008FDC1B /* elctl in Copy Executables */ = {isa = PBXBuildFile; fileRef = F86795A21EF5A8D9008FDC1B /* elctl */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F87C58A71EFA4A7D00D791BD /* ELToolbox.h in Headers */ = {isa = PBXBuildFile; fileRef = F87C58A51EFA4A7D00D791BD /* ELToolbox.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F87C58A81EFA4A7D00D791BD /* ELToolbox.m in Sources */ = {isa = PBXBuildFile; fileRef = F87C58A61EFA4A7D00D791BD /* ELToolbox.m */; };
 		F87E22581EE8AC0F00CB14A0 /* EasyLogin.h in Headers */ = {isa = PBXBuildFile; fileRef = F87E22561EE8AC0F00CB14A0 /* EasyLogin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F87E22601EE920B500CB14A0 /* ELCachingDBProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = F87E225E1EE920B500CB14A0 /* ELCachingDBProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F87E22651EE9214600CB14A0 /* ELCachingDBProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F87E22641EE9214600CB14A0 /* ELCachingDBProxy.m */; };
@@ -76,6 +78,8 @@
 /* Begin PBXFileReference section */
 		F848227B1EF5B20700E6A518 /* ELCachingDBProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ELCachingDBProtocol.h; path = ../../EasyLoginDB/EasyLoginDB/ELCachingDBProtocol.h; sourceTree = "<group>"; };
 		F867959D1EF5A8D8008FDC1B /* elctl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = elctl.xcodeproj; path = ../elctl/elctl.xcodeproj; sourceTree = "<group>"; };
+		F87C58A51EFA4A7D00D791BD /* ELToolbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELToolbox.h; sourceTree = "<group>"; };
+		F87C58A61EFA4A7D00D791BD /* ELToolbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELToolbox.m; sourceTree = "<group>"; };
 		F87E22531EE8AC0F00CB14A0 /* EasyLogin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyLogin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F87E22561EE8AC0F00CB14A0 /* EasyLogin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyLogin.h; sourceTree = "<group>"; };
 		F87E22571EE8AC0F00CB14A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 				F87E22561EE8AC0F00CB14A0 /* EasyLogin.h */,
 				F87E225E1EE920B500CB14A0 /* ELCachingDBProxy.h */,
 				F87E22641EE9214600CB14A0 /* ELCachingDBProxy.m */,
+				F87C58A51EFA4A7D00D791BD /* ELToolbox.h */,
+				F87C58A61EFA4A7D00D791BD /* ELToolbox.m */,
 				F87E22571EE8AC0F00CB14A0 /* Info.plist */,
 			);
 			path = EasyLogin;
@@ -154,6 +160,7 @@
 			files = (
 				F87E22581EE8AC0F00CB14A0 /* EasyLogin.h in Headers */,
 				F848227C1EF5B20700E6A518 /* ELCachingDBProtocol.h in Headers */,
+				F87C58A71EFA4A7D00D791BD /* ELToolbox.h in Headers */,
 				F87E22601EE920B500CB14A0 /* ELCachingDBProxy.h in Headers */,
 				F8DDF2F01EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.h in Headers */,
 			);
@@ -259,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F87C58A81EFA4A7D00D791BD /* ELToolbox.m in Sources */,
 				F87E22651EE9214600CB14A0 /* ELCachingDBProxy.m in Sources */,
 				F8DDF2F11EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.m in Sources */,
 			);
