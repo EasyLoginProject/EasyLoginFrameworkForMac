@@ -1,0 +1,3 @@
+[submodule "Vendors/SocketRocket"]
+	path = Vendors/SocketRocket
+	url = git@github.com:EasyLoginProject/SocketRocket.git

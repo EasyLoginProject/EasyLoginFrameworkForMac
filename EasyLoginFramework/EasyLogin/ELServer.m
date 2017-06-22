@@ -15,11 +15,13 @@
 #import "ELRecordProperties.h"
 
 #import "ELNetworkOperation.h"
+#import <SocketRocket/SocketRocket.h>
 
-@interface ELServer ()
+@interface ELServer () <SRWebSocketDelegate>
 
 @property(strong, readwrite) NSURL *baseURL;
 @property(strong, readwrite) ELWebServiceConnector *connector;
+@property(strong, readwrite) SRWebSocket *webSocket;
 
 @end
 
@@ -32,6 +34,8 @@
         _baseURL = baseURL;
         _connector = [[ELWebServiceConnector alloc] initWithBaseURL:baseURL headers:nil];
         
+        [self openWebsocket];
+
         if(_connector == nil) {
             return nil;
         }
@@ -39,6 +43,54 @@
     
     return self;
 }
+
+#pragma mark - WebSocket
+
+- (void)openWebsocket {
+    if (self.webSocket) {
+        return;
+    }
+    
+    NSURL *wsURL = [NSURL URLWithString:[NSString stringWithFormat:@"/notifications"]
+                          relativeToURL:self.baseURL];
+    self.webSocket = [[SRWebSocket alloc] initWithURL:wsURL];
+    self.webSocket.delegate = self;
+    [self.webSocket open];
+}
+
+- (void)webSocketDidOpen:(SRWebSocket *)webSocket {
+    NSLog(@"EasyLogin connected with success to server update stream");
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
+    NSLog(@"EasyLogin connected with error to server update stream: %@", error);
+    self.webSocket = nil;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self openWebsocket];
+    });
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessageWithString:(nonnull NSString *)string {
+    NSLog(@"EasyLogin recieved and update notification");
+    [[NSNotificationCenter defaultCenter] postNotificationName:kELServerUpdateNotification object:self];
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
+    NSLog(@"EasyLogin update stream closed: %@", reason);
+    self.webSocket = nil;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self openWebsocket];
+    });
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didReceivePong:(NSData *)pongPayload {
+    NSLog(@"EasyLogin update stream played ping-pong");
+}
+
+
+#pragma mark -
 
 -(void)createNewRecordWithEntity:(NSString *)entity properties:(ELRecordProperties*)properties/*or do we want a basic NSDictionary?*/ completionBlock:(nullable void (^)(__kindof ELRecord* _Nullable newRecord, NSError * _Nullable error))completionBlock
 {

@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 
 #import "ELRecordProtocol.h"
+
 @class ELWebServiceConnector;
 @class ELRecord;
 @class ELRecordProperties;
+
+#define kELServerUpdateNotification @"ELServerUpdateNotification"
 
 NS_ASSUME_NONNULL_BEGIN
 

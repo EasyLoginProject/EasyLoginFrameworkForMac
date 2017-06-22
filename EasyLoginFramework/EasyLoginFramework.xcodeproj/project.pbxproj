@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		F81AE3051EFC09AF006D9983 /* ELJSONNetworkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2F31EFC09AF006D9983 /* ELJSONNetworkOperation.h */; };
 		F81AE3061EFC09AF006D9983 /* ELJSONNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F81AE2F41EFC09AF006D9983 /* ELJSONNetworkOperation.m */; };
-		F81AE3071EFC09AF006D9983 /* ELNetworkOperation_private.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2F51EFC09AF006D9983 /* ELNetworkOperation_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		F81AE3071EFC09AF006D9983 /* ELNetworkOperation_private.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2F51EFC09AF006D9983 /* ELNetworkOperation_private.h */; };
 		F81AE3081EFC09AF006D9983 /* ELNetworkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2F61EFC09AF006D9983 /* ELNetworkOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F81AE3091EFC09AF006D9983 /* ELNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F81AE2F71EFC09AF006D9983 /* ELNetworkOperation.m */; };
 		F81AE30A1EFC09AF006D9983 /* ELDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2F81EFC09AF006D9983 /* ELDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -25,6 +25,7 @@
 		F81AE3141EFC09AF006D9983 /* ELUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F81AE3021EFC09AF006D9983 /* ELUser.m */; };
 		F81AE3151EFC09AF006D9983 /* ELWebServiceConnector.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE3031EFC09AF006D9983 /* ELWebServiceConnector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F81AE3161EFC09AF006D9983 /* ELWebServiceConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = F81AE3041EFC09AF006D9983 /* ELWebServiceConnector.m */; };
+		F81AE34C1EFC198F006D9983 /* SocketRocket.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = F81AE3431EFC1963006D9983 /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F848227C1EF5B20700E6A518 /* ELCachingDBProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F848227B1EF5B20700E6A518 /* ELCachingDBProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F86795AC1EF5AE3D008FDC1B /* elctl in Copy Executables */ = {isa = PBXBuildFile; fileRef = F86795A21EF5A8D9008FDC1B /* elctl */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F87C58A71EFA4A7D00D791BD /* ELToolbox.h in Headers */ = {isa = PBXBuildFile; fileRef = F87C58A51EFA4A7D00D791BD /* ELToolbox.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -38,6 +39,55 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F81AE33E1EFC1963006D9983 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F81AE3351EFC1963006D9983 /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 81D6478D1D2CA78800690609;
+			remoteInfo = "SocketRocket-iOS";
+		};
+		F81AE3401EFC1963006D9983 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F81AE3351EFC1963006D9983 /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D4227621BB4358C000C1A6C;
+			remoteInfo = "SocketRocket-iOS-Dynamic";
+		};
+		F81AE3421EFC1963006D9983 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F81AE3351EFC1963006D9983 /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F668C880153E91210044DBAC;
+			remoteInfo = "SocketRocket-macOS";
+		};
+		F81AE3441EFC1963006D9983 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F81AE3351EFC1963006D9983 /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3345DC901C52ACD70083CCB8;
+			remoteInfo = "SocketRocket-tvOS";
+		};
+		F81AE3461EFC1963006D9983 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F81AE3351EFC1963006D9983 /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F6BDA802145900D200FE3253;
+			remoteInfo = "SocketRocketTests-iOS";
+		};
+		F81AE3481EFC1963006D9983 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F81AE3351EFC1963006D9983 /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F62417E314D52F3C003CE997;
+			remoteInfo = TestChat;
+		};
+		F81AE34E1EFC199B006D9983 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F81AE3351EFC1963006D9983 /* SocketRocket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F668C87F153E91210044DBAC;
+			remoteInfo = "SocketRocket-macOS";
+		};
 		F86795A11EF5A8D9008FDC1B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F867959D1EF5A8D8008FDC1B /* elctl.xcodeproj */;
@@ -75,6 +125,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F81AE34C1EFC198F006D9983 /* SocketRocket.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,6 +173,7 @@
 		F81AE3021EFC09AF006D9983 /* ELUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELUser.m; sourceTree = "<group>"; };
 		F81AE3031EFC09AF006D9983 /* ELWebServiceConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELWebServiceConnector.h; sourceTree = "<group>"; };
 		F81AE3041EFC09AF006D9983 /* ELWebServiceConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELWebServiceConnector.m; sourceTree = "<group>"; };
+		F81AE3351EFC1963006D9983 /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = ../Vendors/SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
 		F848227B1EF5B20700E6A518 /* ELCachingDBProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ELCachingDBProtocol.h; path = ../../EasyLoginDB/EasyLoginDB/ELCachingDBProtocol.h; sourceTree = "<group>"; };
 		F867959D1EF5A8D8008FDC1B /* elctl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = elctl.xcodeproj; path = ../elctl/elctl.xcodeproj; sourceTree = "<group>"; };
 		F87C58A51EFA4A7D00D791BD /* ELToolbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELToolbox.h; sourceTree = "<group>"; };
@@ -204,8 +256,22 @@
 		F81AE3181EFC16C8006D9983 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				F81AE3351EFC1963006D9983 /* SocketRocket.xcodeproj */,
 			);
 			name = Vendors;
+			sourceTree = "<group>";
+		};
+		F81AE3361EFC1963006D9983 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F81AE33F1EFC1963006D9983 /* SocketRocket.framework */,
+				F81AE3411EFC1963006D9983 /* SocketRocket.framework */,
+				F81AE3431EFC1963006D9983 /* SocketRocket.framework */,
+				F81AE3451EFC1963006D9983 /* SocketRocket.framework */,
+				F81AE3471EFC1963006D9983 /* SocketRocketTests-iOS.xctest */,
+				F81AE3491EFC1963006D9983 /* TestChat.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		F867959E1EF5A8D8008FDC1B /* Products */ = {
@@ -298,6 +364,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F81AE34F1EFC199B006D9983 /* PBXTargetDependency */,
 				F86795AA1EF5AE29008FDC1B /* PBXTargetDependency */,
 				F87E226F1EE926E700CB14A0 /* PBXTargetDependency */,
 			);
@@ -341,6 +408,10 @@
 					ProductGroup = F867959E1EF5A8D8008FDC1B /* Products */;
 					ProjectRef = F867959D1EF5A8D8008FDC1B /* elctl.xcodeproj */;
 				},
+				{
+					ProductGroup = F81AE3361EFC1963006D9983 /* Products */;
+					ProjectRef = F81AE3351EFC1963006D9983 /* SocketRocket.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -350,6 +421,48 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		F81AE33F1EFC1963006D9983 /* SocketRocket.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SocketRocket.framework;
+			remoteRef = F81AE33E1EFC1963006D9983 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F81AE3411EFC1963006D9983 /* SocketRocket.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SocketRocket.framework;
+			remoteRef = F81AE3401EFC1963006D9983 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F81AE3431EFC1963006D9983 /* SocketRocket.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SocketRocket.framework;
+			remoteRef = F81AE3421EFC1963006D9983 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F81AE3451EFC1963006D9983 /* SocketRocket.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SocketRocket.framework;
+			remoteRef = F81AE3441EFC1963006D9983 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F81AE3471EFC1963006D9983 /* SocketRocketTests-iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SocketRocketTests-iOS.xctest";
+			remoteRef = F81AE3461EFC1963006D9983 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F81AE3491EFC1963006D9983 /* TestChat.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = TestChat.app;
+			remoteRef = F81AE3481EFC1963006D9983 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		F86795A21EF5A8D9008FDC1B /* elctl */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
@@ -398,6 +511,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F81AE34F1EFC199B006D9983 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SocketRocket-macOS";
+			targetProxy = F81AE34E1EFC199B006D9983 /* PBXContainerItemProxy */;
+		};
 		F86795AA1EF5AE29008FDC1B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = elctl;
