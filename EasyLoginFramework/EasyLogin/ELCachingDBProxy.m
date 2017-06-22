@@ -50,6 +50,31 @@
     [self.xpcService.remoteObjectProxy unregisterRecordOfType:recordType withUUID:uuid];
 }
 
+- (void)getAllRegisteredRecordsMatchingPredicates:(NSArray *)predicates withCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler {
+    [[self.xpcService remoteObjectProxyWithErrorHandler:^(NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+            completionHandler(nil, error);
+        });
+    }] getAllRegisteredRecordsMatchingPredicates:predicates withCompletionHandler:^(NSArray<NSDictionary *> *results, NSError *error) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+            completionHandler(results, error);
+        });
+    }];
+}
+
+- (void)getAllRegisteredRecordsMatchingPredicate:(NSDictionary *)predicate withCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler {
+    [[self.xpcService remoteObjectProxyWithErrorHandler:^(NSError * _Nonnull error) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+            completionHandler(nil, error);
+        });
+    }] getAllRegisteredRecordsMatchingPredicate:predicate withCompletionHandler:^(NSArray<NSDictionary *> *results, NSError *error) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+            completionHandler(results, error);
+        });
+    }];
+
+}
+
 - (void)getAllRegisteredRecordsOfType:(NSString*)recordType withAttributesToReturn:(NSArray<NSString*> *)attributes andCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler {
     [[self.xpcService remoteObjectProxyWithErrorHandler:^(NSError * _Nonnull error) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{

@@ -35,6 +35,14 @@
     [self.cachingDB unregisterRecordOfType:recordType withUUID:uuid];
 }
 
+-(void)getAllRegisteredRecordsMatchingPredicates:(NSArray *)predicates withCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler {
+    [self.cachingDB getAllRegisteredRecordsMatchingPredicates:predicates withCompletionHandler:completionHandler];
+}
+
+- (void)getAllRegisteredRecordsMatchingPredicate:(NSDictionary *)predicate withCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler {
+    [self.cachingDB getAllRegisteredRecordsMatchingPredicate:predicate withCompletionHandler:completionHandler];
+}
+
 - (void)getAllRegisteredRecordsOfType:(NSString*)recordType withAttributesToReturn:(NSArray<NSString*> *)attributes andCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler;
 {
     [self.cachingDB getAllRegisteredRecordsOfType:recordType withAttributesToReturn:attributes andCompletionHandler:completionHandler];

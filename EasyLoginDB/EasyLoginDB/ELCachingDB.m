@@ -191,6 +191,222 @@
     [self.recordsLock unlock];
 }
 
+- (void)getAllRegisteredRecordsMatchingPredicates:(NSArray *)predicates withCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler {
+    NSLog(@"Getting all registered records matching list of predicates: %@", predicates);
+    
+    NSMutableArray *matchingRecords = [NSMutableArray new];
+    
+    for (NSDictionary *predicate in predicates) {
+        [self getAllRegisteredRecordsMatchingPredicate:predicate withCompletionHandler:^(NSArray<NSDictionary *> *results, NSError *error) {
+            [matchingRecords addObjectsFromArray:results];
+        }];
+    }
+    
+    completionHandler(matchingRecords, nil);
+    
+}
+
+- (void)getAllRegisteredRecordsMatchingPredicate:(NSDictionary *)predicate withCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler {
+    NSLog(@"Getting all registered records matching specific predicate: %@", predicate);
+    
+    /*
+     -- Multiple
+     predicateList
+     operator
+     @"OR"
+     @"AND"
+     @"NOT"
+     
+     -- Single
+     recordType
+     attribute
+     valueList
+
+     matchType
+     @"any"
+     @"equalTo"
+     @"beginsWith"
+     @"endsWith"
+     @"contains"
+     @"greaterThan"
+     @"lessThan"
+     
+     equalityRule
+     @"none"
+     @"caseIgnore"
+     @"caseExact"
+     @"number"
+     @"certificate"
+     @"time"
+     @"telephoneNumber"
+     @"octetMatch"
+     */
+    
+    NSMutableArray *matchingRecords = [NSMutableArray new];
+    NSArray *subPredicates = [predicate objectForKey:@"predicateList"];
+    NSString *operator = [predicate objectForKey:@"operator"];
+    __block NSError *processError = nil;
+    
+    if (subPredicates) {
+        __block BOOL initialLoadDone = NO;
+        for (NSDictionary *subPredicate in subPredicates) {
+            [self getAllRegisteredRecordsMatchingPredicate:subPredicate withCompletionHandler:^(NSArray<NSDictionary *> *results, NSError *error) {
+                if (error) {
+                    NSLog(@"Nested predicate error: %@", error);
+                    processError = error;
+                } else {
+                    if (!initialLoadDone) {
+                        initialLoadDone = YES;
+                        [matchingRecords addObjectsFromArray:results];
+                    } else {
+                        if ([@"AND" isEqualToString:operator]) {
+                            NSMutableIndexSet *indexesToKeep = [NSMutableIndexSet new];
+                            for (NSDictionary *record in results) {
+                                NSString *uuidInSecondArray = [record objectForKey:@"uuid"];
+                                [matchingRecords enumerateObjectsUsingBlock:^(NSDictionary *potentialRecord, NSUInteger idx, BOOL * _Nonnull stop) {
+                                    if ([[potentialRecord objectForKey:@"uuid"] isEqualToString:uuidInSecondArray]) {
+                                        [indexesToKeep addIndex:idx];
+                                    }
+                                }];
+                            }
+                            NSArray *recordsToKeep = [matchingRecords objectsAtIndexes:indexesToKeep];
+                            [matchingRecords removeAllObjects];
+                            [matchingRecords addObjectsFromArray:recordsToKeep];
+                        } else if ([@"NOT" isEqualToString:operator]) {
+                            NSMutableIndexSet *indexesToRemove = [NSMutableIndexSet new];
+                            for (NSDictionary *record in results) {
+                                NSString *uuidInSecondArray = [record objectForKey:@"uuid"];
+                                [matchingRecords enumerateObjectsUsingBlock:^(NSDictionary *potentialRecord, NSUInteger idx, BOOL * _Nonnull stop) {
+                                    if ([[potentialRecord objectForKey:@"uuid"] isEqualToString:uuidInSecondArray]) {
+                                        [indexesToRemove addIndex:idx];
+                                    }
+                                }];
+                            }
+                            [matchingRecords removeObjectsAtIndexes:indexesToRemove];
+
+                        } else {
+                            [matchingRecords addObjectsFromArray:results];
+                        }
+                    }
+                }
+            }];
+            
+            if (processError) {
+                break;
+            }
+        }
+    } else {
+        NSString *matchType = [predicate objectForKey:@"matchType"];
+        NSString *recordType = [predicate objectForKey:@"recordType"];
+        
+        if ([@"any" isEqualToString:matchType]) {
+            [matchingRecords addObjectsFromArray:[[self.recordsPerTypeAndUUID objectForKey:recordType] allObjects]];
+        } else {
+            NSString *attribute = [predicate objectForKey:@"attribute"];
+            NSString *equalityRule = [predicate objectForKey:@"equalityRule"];
+            NSArray *valueList = [predicate objectForKey:@"valueList"];
+            
+            id (^valueConverterForComparaison)(NSString*) = nil;
+            
+            if ([@"number" isEqualToString:equalityRule]) {
+                NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+                
+                valueConverterForComparaison = ^id(NSString*originalValue) {
+                    return [numberFormatter numberFromString:originalValue];
+                };
+            } else if ([@"time" isEqualToString:equalityRule]) {
+                NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingAllTypes error:nil];
+                
+                valueConverterForComparaison = ^id(NSString*originalValue) {
+                    __block NSDate *date;
+                    [detector enumerateMatchesInString:originalValue options:0 range:NSMakeRange(0, [originalValue length]) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
+                        date = result.date;
+                    }];
+                    
+                    return date;
+                };
+            } else if ([@"caseIgnore" isEqualToString:equalityRule]) {
+                valueConverterForComparaison = ^id(NSString*originalValue) {
+                    return [originalValue lowercaseString];
+                };
+            } else if ([@"octetMatch" isEqualToString:equalityRule]) {
+                valueConverterForComparaison = ^id(NSString*originalValue) {
+                    return [originalValue dataUsingEncoding:NSUTF8StringEncoding];
+                };
+            } else {
+                valueConverterForComparaison = ^id(NSString*originalValue) {
+                    return originalValue;
+                };
+            }
+            
+            NSMutableArray *convertedValueList = [NSMutableArray new];
+            
+            for (NSString *originalValue in valueList) {
+                [convertedValueList addObject:valueConverterForComparaison(originalValue)];
+            }
+            
+            for (id valueToLookFor in convertedValueList) {
+                for (id indexedValue in [[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute]) {
+                    if ([@"equalTo" isEqualToString:matchType]) {
+                        if ([valueConverterForComparaison(indexedValue) isEqualTo:valueToLookFor]) {
+                            NSArray *matchingUUIDs = [[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue];
+                            for (NSString *recordUUID in matchingUUIDs) {
+                                [matchingRecords addObject:[[self.recordsPerTypeAndUUID objectForKey:recordType] objectForKey:recordUUID]];
+                            }
+                        }
+                    } else if ([@"beginsWith" isEqualToString:matchType]) {
+                        NSString *valueToLookForAsString = valueToLookFor;
+                        NSString *indexedValueAsString = indexedValue;
+                        
+                        if ([[indexedValueAsString substringToIndex:[valueToLookForAsString length]] isEqualToString:valueToLookForAsString]) {
+                            NSArray *matchingUUIDs = [[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue];
+                            for (NSString *recordUUID in matchingUUIDs) {
+                                [matchingRecords addObject:[[self.recordsPerTypeAndUUID objectForKey:recordType] objectForKey:recordUUID]];
+                            }                        }
+                    } else if ([@"endsWith" isEqualToString:matchType]) {
+                        NSString *valueToLookForAsString = valueToLookFor;
+                        NSString *indexedValueAsString = indexedValue;
+                        NSString *substring = [indexedValueAsString substringWithRange:NSMakeRange([indexedValueAsString length] - [valueToLookForAsString length], [valueToLookForAsString length])];
+                        if ([[indexedValueAsString substringWithRange:NSMakeRange([indexedValueAsString length] - [valueToLookForAsString length], [valueToLookForAsString length])] isEqualToString:valueToLookForAsString]) {
+                            NSArray *matchingUUIDs = [[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue];
+                            for (NSString *recordUUID in matchingUUIDs) {
+                                [matchingRecords addObject:[[self.recordsPerTypeAndUUID objectForKey:recordType] objectForKey:recordUUID]];
+                            }                        }
+                    } else if ([@"contains" isEqualToString:matchType]) {
+                        NSString *valueToLookForAsString = valueToLookFor;
+                        NSString *indexedValueAsString = indexedValue;
+                        
+                        if ([indexedValueAsString containsString:valueToLookForAsString]) {
+                            NSArray *matchingUUIDs = [[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue];
+                            for (NSString *recordUUID in matchingUUIDs) {
+                                [matchingRecords addObject:[[self.recordsPerTypeAndUUID objectForKey:recordType] objectForKey:recordUUID]];
+                            }                        }
+                    } else if ([@"greaterThan" isEqualToString:matchType]) {
+                        if ([indexedValue compare:valueToLookFor] == NSOrderedDescending) {
+                            NSArray *matchingUUIDs = [[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue];
+                            for (NSString *recordUUID in matchingUUIDs) {
+                                [matchingRecords addObject:[[self.recordsPerTypeAndUUID objectForKey:recordType] objectForKey:recordUUID]];
+                            }                        }
+                    } else if ([@"lessThan" isEqualToString:matchType]) {
+                        if ([indexedValue compare:valueToLookFor] == NSOrderedAscending) {
+                            NSArray *matchingUUIDs = [[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue];
+                            for (NSString *recordUUID in matchingUUIDs) {
+                                [matchingRecords addObject:[[self.recordsPerTypeAndUUID objectForKey:recordType] objectForKey:recordUUID]];
+                            }                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (processError) {
+        completionHandler(nil, processError);
+    } else {
+        completionHandler(matchingRecords, nil);
+    }
+    
+}
+
 - (void)getAllRegisteredRecordsOfType:(NSString*)recordType withAttributesToReturn:(NSArray<NSString*> *)attributes andCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler {
     NSLog(@"Get all registered records");
     

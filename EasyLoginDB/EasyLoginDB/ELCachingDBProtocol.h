@@ -20,6 +20,10 @@ typedef void (^EasyLoginDBErrorHandler_t)(NSError *error);
 
 - (void)registerRecord:(NSDictionary*)record ofType:(NSString*)recordType withUUID:(NSString*)uuid;
 - (void)unregisterRecordOfType:(NSString*)recordType withUUID:(NSString*)uuid;
+
+- (void)getAllRegisteredRecordsMatchingPredicates:(NSArray*)predicates withCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler;
+- (void)getAllRegisteredRecordsMatchingPredicate:(NSDictionary *)predicate withCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler;
+
 - (void)getAllRegisteredRecordsOfType:(NSString*)recordType withAttributesToReturn:(NSArray<NSString*> *)attributes andCompletionHandler:(EasyLoginDBQueryResult_t)completionHandler;
 - (void)getAllRegisteredUUIDsOfType:(NSString*)recordType andCompletionHandler:(EasyLoginDBUUIDsResult_t)completionHandler;
 - (void)getRegisteredRecordUUIDsOfType:(NSString*)recordType matchingAllAttributes:(NSDictionary<NSString*,NSString*>*)attributesWithValues andCompletionHandler:(EasyLoginDBUUIDsResult_t)completionHandler;
