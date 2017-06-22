@@ -12,4 +12,11 @@
 #import <EasyLogin/ELCachingDBProxy.h>
 #import <EasyLogin/ELAsyncBlockToManageAsOperation.h>
 #import <EasyLogin/ELtoolbox.h>
+#import <EasyLogin/ELServer.h>
+#import <EasyLogin/ELRecord.h>
+#import <EasyLogin/ELRecordProtocol.h>
+#import <EasyLogin/ELUser.h>
+#import <EasyLogin/ELDevice.h>
+#import <EasyLogin/ELNetworkOperation.h>
+#import <EasyLogin/ELWebServiceConnector.h>
 

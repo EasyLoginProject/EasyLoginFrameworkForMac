@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F81AE3051EFC09AF006D9983 /* ELJSONNetworkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2F31EFC09AF006D9983 /* ELJSONNetworkOperation.h */; };
+		F81AE3061EFC09AF006D9983 /* ELJSONNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F81AE2F41EFC09AF006D9983 /* ELJSONNetworkOperation.m */; };
+		F81AE3071EFC09AF006D9983 /* ELNetworkOperation_private.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2F51EFC09AF006D9983 /* ELNetworkOperation_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		F81AE3081EFC09AF006D9983 /* ELNetworkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2F61EFC09AF006D9983 /* ELNetworkOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F81AE3091EFC09AF006D9983 /* ELNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F81AE2F71EFC09AF006D9983 /* ELNetworkOperation.m */; };
+		F81AE30A1EFC09AF006D9983 /* ELDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2F81EFC09AF006D9983 /* ELDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F81AE30B1EFC09AF006D9983 /* ELDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = F81AE2F91EFC09AF006D9983 /* ELDevice.m */; };
+		F81AE30C1EFC09AF006D9983 /* ELRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2FA1EFC09AF006D9983 /* ELRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F81AE30D1EFC09AF006D9983 /* ELRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = F81AE2FB1EFC09AF006D9983 /* ELRecord.m */; };
+		F81AE30E1EFC09AF006D9983 /* ELRecordProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2FC1EFC09AF006D9983 /* ELRecordProperties.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F81AE30F1EFC09AF006D9983 /* ELRecordProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F81AE2FD1EFC09AF006D9983 /* ELRecordProperties.m */; };
+		F81AE3101EFC09AF006D9983 /* ELRecordProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2FE1EFC09AF006D9983 /* ELRecordProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F81AE3111EFC09AF006D9983 /* ELServer.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2FF1EFC09AF006D9983 /* ELServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F81AE3121EFC09AF006D9983 /* ELServer.m in Sources */ = {isa = PBXBuildFile; fileRef = F81AE3001EFC09AF006D9983 /* ELServer.m */; };
+		F81AE3131EFC09AF006D9983 /* ELUser.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE3011EFC09AF006D9983 /* ELUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F81AE3141EFC09AF006D9983 /* ELUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F81AE3021EFC09AF006D9983 /* ELUser.m */; };
+		F81AE3151EFC09AF006D9983 /* ELWebServiceConnector.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE3031EFC09AF006D9983 /* ELWebServiceConnector.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F81AE3161EFC09AF006D9983 /* ELWebServiceConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = F81AE3041EFC09AF006D9983 /* ELWebServiceConnector.m */; };
 		F848227C1EF5B20700E6A518 /* ELCachingDBProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F848227B1EF5B20700E6A518 /* ELCachingDBProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F86795AC1EF5AE3D008FDC1B /* elctl in Copy Executables */ = {isa = PBXBuildFile; fileRef = F86795A21EF5A8D9008FDC1B /* elctl */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F87C58A71EFA4A7D00D791BD /* ELToolbox.h in Headers */ = {isa = PBXBuildFile; fileRef = F87C58A51EFA4A7D00D791BD /* ELToolbox.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -51,6 +69,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		F81AE32E1EFC16E4006D9983 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F86795AB1EF5AE34008FDC1B /* Copy Executables */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -76,6 +104,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F81AE2F31EFC09AF006D9983 /* ELJSONNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELJSONNetworkOperation.h; sourceTree = "<group>"; };
+		F81AE2F41EFC09AF006D9983 /* ELJSONNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELJSONNetworkOperation.m; sourceTree = "<group>"; };
+		F81AE2F51EFC09AF006D9983 /* ELNetworkOperation_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELNetworkOperation_private.h; sourceTree = "<group>"; };
+		F81AE2F61EFC09AF006D9983 /* ELNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELNetworkOperation.h; sourceTree = "<group>"; };
+		F81AE2F71EFC09AF006D9983 /* ELNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELNetworkOperation.m; sourceTree = "<group>"; };
+		F81AE2F81EFC09AF006D9983 /* ELDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELDevice.h; sourceTree = "<group>"; };
+		F81AE2F91EFC09AF006D9983 /* ELDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELDevice.m; sourceTree = "<group>"; };
+		F81AE2FA1EFC09AF006D9983 /* ELRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELRecord.h; sourceTree = "<group>"; };
+		F81AE2FB1EFC09AF006D9983 /* ELRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELRecord.m; sourceTree = "<group>"; };
+		F81AE2FC1EFC09AF006D9983 /* ELRecordProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELRecordProperties.h; sourceTree = "<group>"; };
+		F81AE2FD1EFC09AF006D9983 /* ELRecordProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELRecordProperties.m; sourceTree = "<group>"; };
+		F81AE2FE1EFC09AF006D9983 /* ELRecordProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELRecordProtocol.h; sourceTree = "<group>"; };
+		F81AE2FF1EFC09AF006D9983 /* ELServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELServer.h; sourceTree = "<group>"; };
+		F81AE3001EFC09AF006D9983 /* ELServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELServer.m; sourceTree = "<group>"; };
+		F81AE3011EFC09AF006D9983 /* ELUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELUser.h; sourceTree = "<group>"; };
+		F81AE3021EFC09AF006D9983 /* ELUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELUser.m; sourceTree = "<group>"; };
+		F81AE3031EFC09AF006D9983 /* ELWebServiceConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELWebServiceConnector.h; sourceTree = "<group>"; };
+		F81AE3041EFC09AF006D9983 /* ELWebServiceConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELWebServiceConnector.m; sourceTree = "<group>"; };
 		F848227B1EF5B20700E6A518 /* ELCachingDBProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ELCachingDBProtocol.h; path = ../../EasyLoginDB/EasyLoginDB/ELCachingDBProtocol.h; sourceTree = "<group>"; };
 		F867959D1EF5A8D8008FDC1B /* elctl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = elctl.xcodeproj; path = ../elctl/elctl.xcodeproj; sourceTree = "<group>"; };
 		F87C58A51EFA4A7D00D791BD /* ELToolbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELToolbox.h; sourceTree = "<group>"; };
@@ -101,6 +147,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F81AE2F01EFC098B006D9983 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				F8DDF2EE1EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.h */,
+				F8DDF2EF1EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.m */,
+				F87C58A51EFA4A7D00D791BD /* ELToolbox.h */,
+				F87C58A61EFA4A7D00D791BD /* ELToolbox.m */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
+		F81AE2F11EFC0996006D9983 /* CachingDB */ = {
+			isa = PBXGroup;
+			children = (
+				F848227B1EF5B20700E6A518 /* ELCachingDBProtocol.h */,
+				F87E225E1EE920B500CB14A0 /* ELCachingDBProxy.h */,
+				F87E22641EE9214600CB14A0 /* ELCachingDBProxy.m */,
+			);
+			name = CachingDB;
+			sourceTree = "<group>";
+		};
+		F81AE2F21EFC09A1006D9983 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F81AE3171EFC0A14006D9983 /* Core */,
+				F81AE2FF1EFC09AF006D9983 /* ELServer.h */,
+				F81AE3001EFC09AF006D9983 /* ELServer.m */,
+				F81AE2FC1EFC09AF006D9983 /* ELRecordProperties.h */,
+				F81AE2FD1EFC09AF006D9983 /* ELRecordProperties.m */,
+				F81AE2FE1EFC09AF006D9983 /* ELRecordProtocol.h */,
+				F81AE2FA1EFC09AF006D9983 /* ELRecord.h */,
+				F81AE2FB1EFC09AF006D9983 /* ELRecord.m */,
+				F81AE2F81EFC09AF006D9983 /* ELDevice.h */,
+				F81AE2F91EFC09AF006D9983 /* ELDevice.m */,
+				F81AE3011EFC09AF006D9983 /* ELUser.h */,
+				F81AE3021EFC09AF006D9983 /* ELUser.m */,
+				F81AE3031EFC09AF006D9983 /* ELWebServiceConnector.h */,
+				F81AE3041EFC09AF006D9983 /* ELWebServiceConnector.m */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		F81AE3171EFC0A14006D9983 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				F81AE2F31EFC09AF006D9983 /* ELJSONNetworkOperation.h */,
+				F81AE2F41EFC09AF006D9983 /* ELJSONNetworkOperation.m */,
+				F81AE2F51EFC09AF006D9983 /* ELNetworkOperation_private.h */,
+				F81AE2F61EFC09AF006D9983 /* ELNetworkOperation.h */,
+				F81AE2F71EFC09AF006D9983 /* ELNetworkOperation.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		F81AE3181EFC16C8006D9983 /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Vendors;
+			sourceTree = "<group>";
+		};
 		F867959E1EF5A8D8008FDC1B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +219,7 @@
 		F87E22491EE8AC0E00CB14A0 = {
 			isa = PBXGroup;
 			children = (
+				F81AE3181EFC16C8006D9983 /* Vendors */,
 				F867959D1EF5A8D8008FDC1B /* elctl.xcodeproj */,
 				F87E22671EE926D600CB14A0 /* EasyLoginDB.xcodeproj */,
 				F87E22551EE8AC0F00CB14A0 /* EasyLogin */,
@@ -130,14 +238,10 @@
 		F87E22551EE8AC0F00CB14A0 /* EasyLogin */ = {
 			isa = PBXGroup;
 			children = (
-				F848227B1EF5B20700E6A518 /* ELCachingDBProtocol.h */,
-				F8DDF2EE1EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.h */,
-				F8DDF2EF1EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.m */,
 				F87E22561EE8AC0F00CB14A0 /* EasyLogin.h */,
-				F87E225E1EE920B500CB14A0 /* ELCachingDBProxy.h */,
-				F87E22641EE9214600CB14A0 /* ELCachingDBProxy.m */,
-				F87C58A51EFA4A7D00D791BD /* ELToolbox.h */,
-				F87C58A61EFA4A7D00D791BD /* ELToolbox.m */,
+				F81AE2F21EFC09A1006D9983 /* Network */,
+				F81AE2F11EFC0996006D9983 /* CachingDB */,
+				F81AE2F01EFC098B006D9983 /* Tools */,
 				F87E22571EE8AC0F00CB14A0 /* Info.plist */,
 			);
 			path = EasyLogin;
@@ -160,9 +264,19 @@
 			files = (
 				F87E22581EE8AC0F00CB14A0 /* EasyLogin.h in Headers */,
 				F848227C1EF5B20700E6A518 /* ELCachingDBProtocol.h in Headers */,
+				F81AE3151EFC09AF006D9983 /* ELWebServiceConnector.h in Headers */,
+				F81AE30C1EFC09AF006D9983 /* ELRecord.h in Headers */,
 				F87C58A71EFA4A7D00D791BD /* ELToolbox.h in Headers */,
+				F81AE3131EFC09AF006D9983 /* ELUser.h in Headers */,
 				F87E22601EE920B500CB14A0 /* ELCachingDBProxy.h in Headers */,
+				F81AE30E1EFC09AF006D9983 /* ELRecordProperties.h in Headers */,
+				F81AE3101EFC09AF006D9983 /* ELRecordProtocol.h in Headers */,
 				F8DDF2F01EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.h in Headers */,
+				F81AE3051EFC09AF006D9983 /* ELJSONNetworkOperation.h in Headers */,
+				F81AE3071EFC09AF006D9983 /* ELNetworkOperation_private.h in Headers */,
+				F81AE3081EFC09AF006D9983 /* ELNetworkOperation.h in Headers */,
+				F81AE3111EFC09AF006D9983 /* ELServer.h in Headers */,
+				F81AE30A1EFC09AF006D9983 /* ELDevice.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +293,7 @@
 				F87E22511EE8AC0F00CB14A0 /* Resources */,
 				F87E22661EE926A700CB14A0 /* Copy XPC Services */,
 				F86795AB1EF5AE34008FDC1B /* Copy Executables */,
+				F81AE32E1EFC16E4006D9983 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -266,9 +381,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F81AE30B1EFC09AF006D9983 /* ELDevice.m in Sources */,
 				F87C58A81EFA4A7D00D791BD /* ELToolbox.m in Sources */,
+				F81AE30D1EFC09AF006D9983 /* ELRecord.m in Sources */,
 				F87E22651EE9214600CB14A0 /* ELCachingDBProxy.m in Sources */,
+				F81AE30F1EFC09AF006D9983 /* ELRecordProperties.m in Sources */,
+				F81AE3061EFC09AF006D9983 /* ELJSONNetworkOperation.m in Sources */,
+				F81AE3091EFC09AF006D9983 /* ELNetworkOperation.m in Sources */,
+				F81AE3121EFC09AF006D9983 /* ELServer.m in Sources */,
+				F81AE3161EFC09AF006D9983 /* ELWebServiceConnector.m in Sources */,
 				F8DDF2F11EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.m in Sources */,
+				F81AE3141EFC09AF006D9983 /* ELUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
