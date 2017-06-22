@@ -249,8 +249,19 @@
     
     if (subPredicates) {
         __block BOOL initialLoadDone = NO;
+        NSString *recordType = [predicate objectForKey:@"recordType"];
         for (NSDictionary *subPredicate in subPredicates) {
-            [self getAllRegisteredRecordsMatchingPredicate:subPredicate withCompletionHandler:^(NSArray<NSDictionary *> *results, NSError *error) {
+            NSDictionary *completeSubPredicate = subPredicate;
+            if (![subPredicate objectForKey:@"recordType"]) {
+                NSMutableDictionary *mutableSubPredicate = [subPredicate mutableCopy];
+                
+                [mutableSubPredicate setObject:recordType forKey:@"recordType"];
+                
+                completeSubPredicate = mutableSubPredicate;
+            }
+            
+            
+            [self getAllRegisteredRecordsMatchingPredicate:completeSubPredicate withCompletionHandler:^(NSArray<NSDictionary *> *results, NSError *error) {
                 if (error) {
                     NSLog(@"Nested predicate error: %@", error);
                     processError = error;
@@ -300,7 +311,12 @@
         NSString *recordType = [predicate objectForKey:@"recordType"];
         
         if ([@"any" isEqualToString:matchType]) {
-            [matchingRecords addObjectsFromArray:[[self.recordsPerTypeAndUUID objectForKey:recordType] allObjects]];
+            for (NSDictionary *record in [[self.recordsPerTypeAndUUID objectForKey:recordType] allObjects]) {
+                NSMutableDictionary *updateRecord = [record mutableCopy];
+                [updateRecord setObject:recordType forKey:@"recordType"];
+                [matchingRecords addObject:updateRecord];
+            }
+            
         } else {
             NSString *attribute = [predicate objectForKey:@"attribute"];
             NSString *equalityRule = [predicate objectForKey:@"equalityRule"];
