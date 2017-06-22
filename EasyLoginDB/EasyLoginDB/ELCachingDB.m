@@ -85,7 +85,7 @@
         [self.indexesForRecordsPerTypeAttributeAndValue setObject:[NSMutableDictionary new] forKey:recordType];
         indexesForRecordsPerAttributeAndValue = [self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType];
     }
-
+    
     NSArray *recordAttributes = [record allKeys];
     for (NSString *recordAttribute in recordAttributes) {
         NSString *indexedValue = [record objectForKey:recordAttribute];
@@ -95,7 +95,7 @@
             [indexesForRecordsPerAttributeAndValue setObject:[NSMutableDictionary new] forKey:recordAttribute];
             indexPerValue = [indexesForRecordsPerAttributeAndValue objectForKey:recordAttribute];
         }
-
+        
         NSMutableArray *requestedIndex = [indexPerValue objectForKey:indexedValue];
         
         if (!requestedIndex) {
@@ -221,7 +221,7 @@
      recordType
      attribute
      valueList
-
+     
      matchType
      @"any"
      @"equalTo"
@@ -283,7 +283,7 @@
                                 }];
                             }
                             [matchingRecords removeObjectsAtIndexes:indexesToRemove];
-
+                            
                         } else {
                             [matchingRecords addObjectsFromArray:results];
                         }
@@ -305,6 +305,15 @@
             NSString *attribute = [predicate objectForKey:@"attribute"];
             NSString *equalityRule = [predicate objectForKey:@"equalityRule"];
             NSArray *valueList = [predicate objectForKey:@"valueList"];
+            
+            
+            void (^addMatchingUUIDsWithType)(NSArray*, NSString*) = ^(NSArray *matchingUUIDs, NSString *recordType) {
+                for (NSString *recordUUID in matchingUUIDs) {
+                    NSMutableDictionary *record = [[[self.recordsPerTypeAndUUID objectForKey:recordType] objectForKey:recordUUID] mutableCopy];
+                    [record setObject:recordType forKey:@"recordType"];
+                    [matchingRecords addObject:record];
+                }
+            };
             
             id (^valueConverterForComparaison)(NSString*) = nil;
             
@@ -349,56 +358,43 @@
                 for (id indexedValue in [[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute]) {
                     if ([@"equalTo" isEqualToString:matchType]) {
                         if ([valueConverterForComparaison(indexedValue) isEqualTo:valueToLookFor]) {
-                            NSArray *matchingUUIDs = [[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue];
-                            for (NSString *recordUUID in matchingUUIDs) {
-                                [matchingRecords addObject:[[self.recordsPerTypeAndUUID objectForKey:recordType] objectForKey:recordUUID]];
-                            }
+                            addMatchingUUIDsWithType([[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue], recordType);
                         }
                     } else if ([@"beginsWith" isEqualToString:matchType]) {
                         NSString *valueToLookForAsString = valueToLookFor;
                         NSString *indexedValueAsString = indexedValue;
                         
                         if ([[indexedValueAsString substringToIndex:[valueToLookForAsString length]] isEqualToString:valueToLookForAsString]) {
-                            NSArray *matchingUUIDs = [[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue];
-                            for (NSString *recordUUID in matchingUUIDs) {
-                                [matchingRecords addObject:[[self.recordsPerTypeAndUUID objectForKey:recordType] objectForKey:recordUUID]];
-                            }                        }
+                            addMatchingUUIDsWithType([[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue], recordType);
+                        }
                     } else if ([@"endsWith" isEqualToString:matchType]) {
                         NSString *valueToLookForAsString = valueToLookFor;
                         NSString *indexedValueAsString = indexedValue;
-                        NSString *substring = [indexedValueAsString substringWithRange:NSMakeRange([indexedValueAsString length] - [valueToLookForAsString length], [valueToLookForAsString length])];
+
                         if ([[indexedValueAsString substringWithRange:NSMakeRange([indexedValueAsString length] - [valueToLookForAsString length], [valueToLookForAsString length])] isEqualToString:valueToLookForAsString]) {
-                            NSArray *matchingUUIDs = [[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue];
-                            for (NSString *recordUUID in matchingUUIDs) {
-                                [matchingRecords addObject:[[self.recordsPerTypeAndUUID objectForKey:recordType] objectForKey:recordUUID]];
-                            }                        }
+                            addMatchingUUIDsWithType([[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue], recordType);
+                        }
                     } else if ([@"contains" isEqualToString:matchType]) {
                         NSString *valueToLookForAsString = valueToLookFor;
                         NSString *indexedValueAsString = indexedValue;
                         
                         if ([indexedValueAsString containsString:valueToLookForAsString]) {
-                            NSArray *matchingUUIDs = [[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue];
-                            for (NSString *recordUUID in matchingUUIDs) {
-                                [matchingRecords addObject:[[self.recordsPerTypeAndUUID objectForKey:recordType] objectForKey:recordUUID]];
-                            }                        }
+                            addMatchingUUIDsWithType([[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue], recordType);
+                        }
                     } else if ([@"greaterThan" isEqualToString:matchType]) {
                         if ([indexedValue compare:valueToLookFor] == NSOrderedDescending) {
-                            NSArray *matchingUUIDs = [[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue];
-                            for (NSString *recordUUID in matchingUUIDs) {
-                                [matchingRecords addObject:[[self.recordsPerTypeAndUUID objectForKey:recordType] objectForKey:recordUUID]];
-                            }                        }
+                            addMatchingUUIDsWithType([[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue], recordType);
+                        }
                     } else if ([@"lessThan" isEqualToString:matchType]) {
                         if ([indexedValue compare:valueToLookFor] == NSOrderedAscending) {
-                            NSArray *matchingUUIDs = [[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue];
-                            for (NSString *recordUUID in matchingUUIDs) {
-                                [matchingRecords addObject:[[self.recordsPerTypeAndUUID objectForKey:recordType] objectForKey:recordUUID]];
-                            }                        }
+                            addMatchingUUIDsWithType([[[self.indexesForRecordsPerTypeAttributeAndValue objectForKey:recordType] objectForKey:attribute] objectForKey:indexedValue], recordType);
+                        }
                     }
                 }
             }
         }
     }
-
+    
     if (processError) {
         completionHandler(nil, processError);
     } else {
