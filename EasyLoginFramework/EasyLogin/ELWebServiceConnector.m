@@ -49,7 +49,7 @@
 
 #pragma mark - Type agnostic operations
 
--(__kindof ELNetworkOperation *)getAllRecordsOperationRelatedToEntityClass:(Class<ELRecordProtocol>)entityClass withCompletionBlock:(nullable void (^)(NSArray<ELRecord*> * _Nullable users, __kindof ELNetworkOperation *op))completionBlock
+-(__kindof ELNetworkOperation *)getAllRecordsOperationRelatedToEntityClass:(Class<ELRecordProtocol>)entityClass withCompletionBlock:(nullable void (^)(NSArray<ELRecord*> * _Nullable records, __kindof ELNetworkOperation *op))completionBlock
 {
     ELJSONNetworkOperation *op = [[ELJSONNetworkOperation alloc] initWithMethod:@"GET" urlString:[self absoluteURLStringWithPath:[@"db" stringByAppendingPathComponent:[entityClass collectionName]]] parameters:nil];
     

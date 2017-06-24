@@ -109,11 +109,19 @@
         }];
         [_connector enqueueOperation:op];
     }
-    //    else if([entity isEqualToString:[ELDevice recordEntity]) {
-    //
-    //    }
-    //    ...
     
+    // using more generic Class/Protocol based system
+    else if([entity isEqualToString:[ELDevice recordEntity]]) {
+        
+        if(properties.mapped == YES) {
+            [NSException raise:NSInvalidArgumentException format:@"ELRecordProperties reverse mapping can't be applied automagically. You should create another ELRecordProperties unmapped object, that can be inited with the reverse mapped dictionary..."]; // to be clear, ELRecordProperties can't embed the mapping object since it's block based and very hard to encode with NSCoding...
+        }
+        
+        ELNetworkOperation *op = [_connector createNewRecordOperationRelatedToEntityClass:[ELDevice class] withDictionary:[properties dictionaryRepresentation] completionBlock:^(ELRecord * _Nullable record, __kindof ELNetworkOperation * _Nonnull op) {
+            if(completionBlock) completionBlock(record, op.error);
+        }];
+        [_connector enqueueOperation:op];
+    }
 }
 
 -(void)createNewRecordWithEntityClass:(Class<ELRecordProtocol>)entityClass properties:(ELRecordProperties*)properties/*or do we want a basic NSDictionary?*/ completionBlock:(nullable void (^)(__kindof ELRecord* _Nullable newRecord, NSError * _Nullable error))completionBlock
@@ -144,10 +152,17 @@
         }];
         [_connector enqueueOperation:op];
     }
-    //    else if([entity isEqualToString:[ELDevice recordEntity]) {
-    //
-    //    }
-    //    ...
+    // using more generic Class/Protocol based system
+    else if([entity isEqualToString:[ELDevice recordEntity]]) {
+        
+        ELNetworkOperation *op = [_connector getAllRecordsOperationRelatedToEntityClass:[ELDevice class] withCompletionBlock:^(NSArray<ELRecord *> * _Nullable records, __kindof ELNetworkOperation * _Nonnull op) {
+            if(completionBlock) completionBlock(records, op.error);
+        }];
+        [_connector enqueueOperation:op];
+    }
+    else {
+        if(completionBlock) completionBlock(nil, [NSError errorWithDomain:@"io.easylogin.CoreNetwork" code:0 userInfo:@{NSLocalizedDescriptionKey : [NSString stringWithFormat:@"Unknown entity:'%@'",entity]}]);
+    }
 }
 
 -(void)getAllRecordsWithEntityClass:(Class<ELRecordProtocol>)entityClass completionBlock:(nullable void (^)(NSArray<__kindof ELRecord*> * _Nullable records, NSError * _Nullable error))completionBlock
