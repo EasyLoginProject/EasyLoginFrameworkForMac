@@ -110,6 +110,11 @@
     return [NSDictionary dictionaryWithDictionary:_internalDictionary];
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained _Nullable [_Nonnull])stackbuf count:(NSUInteger)count
+{
+    return [_internalDictionary countByEnumeratingWithState:state objects:stackbuf count:count];
+}
+
 - (nullable id)objectForKey:(nonnull id)aKey
 {
     return [_internalDictionary objectForKey:aKey];

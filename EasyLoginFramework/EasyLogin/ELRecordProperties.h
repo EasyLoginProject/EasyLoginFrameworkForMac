@@ -10,7 +10,7 @@
 
 @class ELRecordPropertiesMapping;
 
-@interface ELRecordProperties : NSObject <NSCopying, NSSecureCoding>
+@interface ELRecordProperties : NSObject <NSCopying, NSSecureCoding, NSFastEnumeration>
 
 +(nullable instancetype)recordPropertiesWithDictionary:(nonnull NSDictionary*)dictionary mapping:(nullable ELRecordPropertiesMapping*)mapping; // null mapping is allowed to skip any processing on the dictionary
 -(nullable instancetype)initWithDictionary:(nonnull NSDictionary*)dictionary mapping:(nullable ELRecordPropertiesMapping*)mapping; // null mapping is allowed to skip any processing on the dictionary
@@ -21,6 +21,7 @@
 
 - (nullable id)objectForKey:(nonnull id)aKey;
 - (nullable id)objectForKeyedSubscript:(nonnull id)aKey;
+
 
 -(void)updateWithProperties:(nonnull ELRecordProperties*)updatedProperties deletes:(BOOL)deleteWhenAbsent kvoNotifier:(nullable id)kvoNotifier;
 

@@ -8,6 +8,15 @@
 
 #import "ELRecord.h"
 
+#define kELUserNumericIDKey @"numericID"
+#define kELUserSurnameKey @"surname"
+#define kELUserFullNameKey @"fullName"
+#define kELUserGivenNameKey @"givenName"
+#define kELUserPrincipalNameKey @"principalName"
+#define kELUserShortnameKey @"shortname"
+#define kELUserEmailKey @"email"
+#define kELUserAuthenticationMethodsKey @"authMethods"
+
 @interface ELUser : ELRecord
 
 #if USE_OBJC_PROPERTIES
