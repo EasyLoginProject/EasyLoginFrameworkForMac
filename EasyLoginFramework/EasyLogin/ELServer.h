@@ -25,10 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(instancetype)initWithBaseURL:(NSURL *)baseURL; // creates a default ELWebServiceConnector that you can tweak.
 
-// NOTE: the Class variant is working for all Entities, when the Entity variant requires specific code each time. We'll probably switch to the Class variant really soon.
--(void)createNewRecordWithEntity:(NSString *)entity properties:(ELRecordProperties*)properties/*or do we want a basic NSDictionary?*/ completionBlock:(nullable void (^)(__kindof ELRecord* _Nullable newRecord, NSError * _Nullable error))completionBlock;
 -(void)createNewRecordWithEntityClass:(Class<ELRecordProtocol>)entityClass properties:(ELRecordProperties*)properties/*or do we want a basic NSDictionary?*/ completionBlock:(nullable void (^)(__kindof ELRecord* _Nullable newRecord, NSError * _Nullable error))completionBlock;
--(void)getAllRecordsWithEntity:(NSString *)entity completionBlock:(nullable void (^)(NSArray<__kindof ELRecord*> * _Nullable records, NSError * _Nullable error))completionBlock; // returned records properties are not complete. You may need to call getUpdatedRecord:completionBlock: below to get all the properties
 -(void)getAllRecordsWithEntityClass:(Class<ELRecordProtocol>)entityClass completionBlock:(nullable void (^)(NSArray<__kindof ELRecord*> * _Nullable records, NSError * _Nullable error))completionBlock;
 -(void)getUpdatedRecord:(__kindof ELRecord*)record completionBlock:(nullable void (^)(__kindof ELRecord * _Nullable updatedRecord, NSError * _Nullable error))completionBlock; // updatedRecord may be nil if the record was deleted on the server?
 
