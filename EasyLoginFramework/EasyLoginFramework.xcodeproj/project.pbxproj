@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C4CF23591EFD0C8D005C1170 /* elctl in Copy Executables */ = {isa = PBXBuildFile; fileRef = F86795A21EF5A8D9008FDC1B /* elctl */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F81AE3051EFC09AF006D9983 /* ELJSONNetworkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2F31EFC09AF006D9983 /* ELJSONNetworkOperation.h */; };
 		F81AE3061EFC09AF006D9983 /* ELJSONNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F81AE2F41EFC09AF006D9983 /* ELJSONNetworkOperation.m */; };
 		F81AE3071EFC09AF006D9983 /* ELNetworkOperation_private.h in Headers */ = {isa = PBXBuildFile; fileRef = F81AE2F51EFC09AF006D9983 /* ELNetworkOperation_private.h */; };
@@ -36,16 +35,11 @@
 		F87E226D1EE926DE00CB14A0 /* EasyLoginDB.xpc in Copy XPC Services */ = {isa = PBXBuildFile; fileRef = F87E226C1EE926D600CB14A0 /* EasyLoginDB.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F8DDF2F01EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F8DDF2EE1EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8DDF2F11EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DDF2EF1EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.m */; };
+		F8F159E11F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F159DF1F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8F159E21F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F159E01F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C4CF23571EFD0C86005C1170 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F867959D1EF5A8D8008FDC1B /* elctl.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F86795921EF5A8D8008FDC1B;
-			remoteInfo = elctl;
-		};
 		F81AE33E1EFC1963006D9983 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F81AE3351EFC1963006D9983 /* SocketRocket.xcodeproj */;
@@ -130,17 +124,6 @@
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F86795AB1EF5AE34008FDC1B /* Copy Executables */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 7;
-			files = (
-				C4CF23591EFD0C8D005C1170 /* elctl in Copy Executables */,
-			);
-			name = "Copy Executables";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F87E22661EE926A700CB14A0 /* Copy XPC Services */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -186,6 +169,8 @@
 		F87E22671EE926D600CB14A0 /* EasyLoginDB.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EasyLoginDB.xcodeproj; path = ../EasyLoginDB/EasyLoginDB.xcodeproj; sourceTree = "<group>"; };
 		F8DDF2EE1EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELAsyncBlockToManageAsOperation.h; sourceTree = "<group>"; };
 		F8DDF2EF1EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELAsyncBlockToManageAsOperation.m; sourceTree = "<group>"; };
+		F8F159DF1F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+EasyLoginSuite.h"; sourceTree = "<group>"; };
+		F8F159E01F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+EasyLoginSuite.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +191,8 @@
 				F8DDF2EF1EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.m */,
 				F87C58A51EFA4A7D00D791BD /* ELToolbox.h */,
 				F87C58A61EFA4A7D00D791BD /* ELToolbox.m */,
+				F8F159DF1F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.h */,
+				F8F159E01F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -341,6 +328,7 @@
 				F81AE3051EFC09AF006D9983 /* ELJSONNetworkOperation.h in Headers */,
 				F81AE3071EFC09AF006D9983 /* ELNetworkOperation_private.h in Headers */,
 				F81AE3081EFC09AF006D9983 /* ELNetworkOperation.h in Headers */,
+				F8F159E11F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.h in Headers */,
 				F81AE3111EFC09AF006D9983 /* ELServer.h in Headers */,
 				F81AE30A1EFC09AF006D9983 /* ELDevice.h in Headers */,
 			);
@@ -358,13 +346,11 @@
 				F87E22501EE8AC0F00CB14A0 /* Headers */,
 				F87E22511EE8AC0F00CB14A0 /* Resources */,
 				F87E22661EE926A700CB14A0 /* Copy XPC Services */,
-				F86795AB1EF5AE34008FDC1B /* Copy Executables */,
 				F81AE32E1EFC16E4006D9983 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C4CF23581EFD0C86005C1170 /* PBXTargetDependency */,
 				F81AE34F1EFC199B006D9983 /* PBXTargetDependency */,
 				F87E226F1EE926E700CB14A0 /* PBXTargetDependency */,
 			);
@@ -496,6 +482,7 @@
 			files = (
 				F81AE30B1EFC09AF006D9983 /* ELDevice.m in Sources */,
 				F87C58A81EFA4A7D00D791BD /* ELToolbox.m in Sources */,
+				F8F159E21F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.m in Sources */,
 				F81AE30D1EFC09AF006D9983 /* ELRecord.m in Sources */,
 				F87E22651EE9214600CB14A0 /* ELCachingDBProxy.m in Sources */,
 				F81AE30F1EFC09AF006D9983 /* ELRecordProperties.m in Sources */,
@@ -511,11 +498,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C4CF23581EFD0C86005C1170 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = elctl;
-			targetProxy = C4CF23571EFD0C86005C1170 /* PBXContainerItemProxy */;
-		};
 		F81AE34F1EFC199B006D9983 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "SocketRocket-macOS";

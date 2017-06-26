@@ -19,4 +19,5 @@
 #import <EasyLogin/ELDevice.h>
 #import <EasyLogin/ELNetworkOperation.h>
 #import <EasyLogin/ELWebServiceConnector.h>
+#import <EasyLogin/NSUserDefaults+EasyLoginSuite.h>
 

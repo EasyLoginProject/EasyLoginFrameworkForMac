@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(strong, readonly) NSURL *baseURL;
 @property(strong, readonly) ELWebServiceConnector *connector;
 
++ (instancetype)sharedInstance;
 -(instancetype)initWithBaseURL:(NSURL *)baseURL; // creates a default ELWebServiceConnector that you can tweak.
 
 -(void)createNewRecordWithEntityClass:(Class<ELRecordProtocol>)entityClass properties:(ELRecordProperties*)properties/*or do we want a basic NSDictionary?*/ completionBlock:(nullable void (^)(__kindof ELRecord* _Nullable newRecord, NSError * _Nullable error))completionBlock;

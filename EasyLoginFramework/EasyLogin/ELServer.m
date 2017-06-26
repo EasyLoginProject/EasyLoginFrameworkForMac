@@ -16,6 +16,7 @@
 
 #import "ELNetworkOperation.h"
 #import <SocketRocket/SocketRocket.h>
+#import "NSUserDefaults+EasyLoginSuite.h"
 
 @interface ELServer () <SRWebSocketDelegate>
 
@@ -26,6 +27,17 @@
 @end
 
 @implementation ELServer
+
++ (instancetype)sharedInstance
+{
+    static id sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *baseURLString = [[NSUserDefaults easyLoginDomain] stringForKey:kELPreferencesBaseURL];
+        sharedInstance = [[self alloc] initWithBaseURL:[NSURL URLWithString:baseURLString]];
+    });
+    return sharedInstance;
+}
 
 -(instancetype)initWithBaseURL:(NSURL *)baseURL // creates a default ELWebServiceConnector that you can tweak.
 {
