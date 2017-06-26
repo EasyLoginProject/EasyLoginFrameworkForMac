@@ -162,7 +162,7 @@
 
 }
 
--(__kindof ELNetworkOperation *)getPropertiesOperationForRecord:(ELRecord *)record completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable userProperties, __kindof ELNetworkOperation *op))completionBlock
+-(__kindof ELNetworkOperation *)getPropertiesOperationForRecord:(ELRecord *)record completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable recordProperties, __kindof ELNetworkOperation *op))completionBlock
 {
     NSParameterAssert(record.identifier != nil);
     
@@ -193,11 +193,27 @@
     return op;
 }
 
--(__kindof ELNetworkOperation *)updatePropertiesOperationForRecord:(ELRecord *)record withPartialProperties:(NSDictionary<NSString*,id> *)recordProperties completionBlock:(nullable void (^)(ELRecord* _Nullable record, __kindof ELNetworkOperation *op))completionBlock
+-(__kindof ELNetworkOperation *)updatePropertiesOperationForRecord:(ELRecord *)record withUpdatedProperties:(NSDictionary<NSString*,id> *)recordUpdatedProperties completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable recordProperties, __kindof ELNetworkOperation *op))completionBlock; // recordUpdatedProperties should only contains *changed* properties. May also contain [NSNull null] values to remove entries.
 {
+    NSParameterAssert(record.identifier != nil);
+    
     ELJSONNetworkOperation *op = [[ELJSONNetworkOperation alloc] initWithMethod:@"PUT" urlString:[self absoluteURLStringWithPath:[[@"db" stringByAppendingPathComponent:[[record class] collectionName]] stringByAppendingPathComponent:record.identifier]] parameters:nil];
+    
+    NSError *jsonError;
+    op.body = [NSJSONSerialization dataWithJSONObject:recordUpdatedProperties options:0 error:&jsonError];
+    if(op.body == nil && completionBlock) {
+        op.error = jsonError;
+        dispatch_async(self.completionQueue,^{
+            completionBlock(nil, op);
+        });
+        
+        return nil;
+    }
+    // set any custom operation header fields, then call setAdditionalHeadersFromWebServiceConnector:toOperation: to complete (and avoid overriding of headers)
+    //op.additionalHeaders = @{"mycustomfield" : @"mycustomvalue"};
+    op.additionalHeaders = @{@"Content-Type" : @"application/json"};
     [[self class] setAdditionalHeadersFromWebServiceConnector:self toOperation:op];
-
+    
     op.responseBlock = ^(ELNetworkOperation *operation, id responseObject, NSError *error) {
         if(!responseObject) {
             if(completionBlock)
@@ -214,7 +230,6 @@
             });
         }
     };
-
     
     return op;
 }
