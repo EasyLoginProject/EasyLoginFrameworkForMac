@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F86795971EF5A8D8008FDC1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F86795961EF5A8D8008FDC1B /* main.m */; };
 		F86795A81EF5A96C008FDC1B /* ControlCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = F86795A71EF5A96C008FDC1B /* ControlCommand.m */; };
+		F8F159EA1F0105B500DF65F1 /* EasyLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F159E91F0105B500DF65F1 /* EasyLogin.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,7 @@
 		F86795961EF5A8D8008FDC1B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F86795A61EF5A96C008FDC1B /* ControlCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlCommand.h; sourceTree = "<group>"; };
 		F86795A71EF5A96C008FDC1B /* ControlCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlCommand.m; sourceTree = "<group>"; };
+		F8F159E91F0105B500DF65F1 /* EasyLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EasyLogin.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/EasyLogin-grzpafyvcnswwpapplmatpdqqdah/Build/Products/Debug/EasyLogin.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8F159EA1F0105B500DF65F1 /* EasyLogin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +49,7 @@
 			children = (
 				F86795951EF5A8D8008FDC1B /* elctl */,
 				F86795941EF5A8D8008FDC1B /* Products */,
+				F8F159E81F0105B500DF65F1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +69,14 @@
 				F86795A71EF5A96C008FDC1B /* ControlCommand.m */,
 			);
 			path = elctl;
+			sourceTree = "<group>";
+		};
+		F8F159E81F0105B500DF65F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F8F159E91F0105B500DF65F1 /* EasyLogin.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +269,7 @@
 				F867959C1EF5A8D8008FDC1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
