@@ -624,7 +624,7 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_OWNER = root;
 				INSTALL_PATH = /Library/Frameworks;
-				LD_RUNPATH_SEARCH_PATHS = /Library/Frameworks;
+				LD_RUNPATH_SEARCH_PATHS = "/Library/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = io.easylogin.EasyLogin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -646,7 +646,7 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_OWNER = root;
 				INSTALL_PATH = /Library/Frameworks;
-				LD_RUNPATH_SEARCH_PATHS = /Library/Frameworks;
+				LD_RUNPATH_SEARCH_PATHS = "/Library/Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = io.easylogin.EasyLogin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
