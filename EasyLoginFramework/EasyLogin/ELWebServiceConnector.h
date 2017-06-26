@@ -32,7 +32,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(__kindof ELNetworkOperation *)getAllRecordsOperationRelatedToEntityClass:(Class<ELRecordProtocol>)entityClass withCompletionBlock:(nullable void (^)(NSArray<ELRecord*> * _Nullable records, __kindof ELNetworkOperation *op))completionBlock;
 -(nullable __kindof ELNetworkOperation *)createNewRecordOperationRelatedToEntityClass:(Class<ELRecordProtocol>)entityClass withDictionary:(NSDictionary<NSString*,id> *)recordInfo completionBlock:(nullable void (^)(ELRecord* _Nullable record, __kindof ELNetworkOperation *op))completionBlock;
+-(__kindof ELNetworkOperation *)getRecordOperationWithEntityClass:(Class<ELRecordProtocol>)entityClass andRecordIdentifier:(NSString*)recordIdentifier withCompletionBlock:(nullable void (^)(ELRecord* _Nullable record, __kindof ELNetworkOperation *op))completionBlock;
 -(__kindof ELNetworkOperation *)getPropertiesOperationForRecord:(ELRecord *)record completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable userProperties, __kindof ELNetworkOperation *op))completionBlock;
+-(__kindof ELNetworkOperation *)updatePropertiesOperationForRecord:(ELRecord *)record withPartialProperties:(NSDictionary<NSString*,id> *)recordProperties completionBlock:(nullable void (^)(ELRecord* _Nullable record, __kindof ELNetworkOperation *op))completionBlock;
+
+//-(__kindof ELNetworkOperation *)updateRecord:(ELRecord *)record withPartialProperties:(NSDictionary<NSString*,id> *)recordProperties completionBlock:(nullable void (^)(ELRecord* _Nullable record, NSError* _Nullable error, __kindof ELNetworkOperation *op))completionBlock;
+
 
 #pragma mark - User Operations
 

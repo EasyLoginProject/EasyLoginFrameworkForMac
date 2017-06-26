@@ -152,4 +152,23 @@
     [_connector enqueueOperation:op];
 }
 
+-(void)getRecordWithEntityClass:(Class<ELRecordProtocol>)entityClass andUniqueIdentifier:(NSString*)uniqueID completionBlock:(nullable void (^)(__kindof ELRecord * _Nullable record, NSError * _Nullable error))completionBlock
+{
+    ELNetworkOperation *op = [_connector getRecordOperationWithEntityClass:entityClass andRecordIdentifier:uniqueID withCompletionBlock:^(ELRecord * _Nullable record, __kindof ELNetworkOperation * _Nonnull op) {
+        completionBlock(record, op.error);
+    }];
+    [_connector enqueueOperation:op];
+}
+
+-(void)updateRecord:(__kindof ELRecord*)record withNewPassword:(NSString*)requestedPassword usingOldPassword:(NSString*)oldPassword completionBlock:(nullable void (^)(__kindof ELRecord * _Nullable updatedRecord, NSError * _Nullable error))completionBlock
+{
+    ELNetworkOperation *op = [_connector updatePropertiesOperationForRecord:record
+                                                      withPartialProperties:@{kELRecordAuthenticationMethodsKey: @{kELRecordAuthenticationMethodClearTextKey: requestedPassword}}
+                                                            completionBlock:^(ELRecord * _Nullable record, __kindof ELNetworkOperation * _Nonnull op) {
+                                                                completionBlock(record, op.error);
+                                                            }];
+    
+    [_connector enqueueOperation:op];
+}
+
 @end

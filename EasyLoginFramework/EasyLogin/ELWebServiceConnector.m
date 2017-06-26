@@ -132,6 +132,36 @@
 
 }
 
+-(__kindof ELNetworkOperation *)getRecordOperationWithEntityClass:(Class<ELRecordProtocol>)entityClass andRecordIdentifier:(NSString*)recordIdentifier withCompletionBlock:(nullable void (^)(ELRecord* _Nullable record, __kindof ELNetworkOperation *op))completionBlock;
+{
+    ELJSONNetworkOperation *op = [[ELJSONNetworkOperation alloc] initWithMethod:@"GET" urlString:[self absoluteURLStringWithPath:[[@"db" stringByAppendingPathComponent:[entityClass collectionName]] stringByAppendingPathComponent:recordIdentifier]] parameters:nil];
+    
+    // set any custom operation header fields, then call setAdditionalHeadersFromWebServiceConnector:toOperation: to complete (and avoid overriding of headers)
+    //op.additionalHeaders = @{"mycustomfield" : @"mycustomvalue"};
+    [[self class] setAdditionalHeadersFromWebServiceConnector:self toOperation:op];
+    
+    op.responseBlock = ^(ELNetworkOperation *operation, id responseObject, NSError *error) {
+        if(!responseObject) {
+            if(completionBlock)
+                dispatch_async(self.completionQueue,^{
+                    completionBlock(nil, operation);
+                });
+            
+            return;
+        }
+        
+        // TODO: remove 'type' entry ? any root object ?
+        if(completionBlock) {
+            dispatch_async(self.completionQueue,^{
+                completionBlock(responseObject, operation);
+            });
+        }
+    };
+    
+    return op;
+
+}
+
 -(__kindof ELNetworkOperation *)getPropertiesOperationForRecord:(ELRecord *)record completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable userProperties, __kindof ELNetworkOperation *op))completionBlock
 {
     NSParameterAssert(record.identifier != nil);
@@ -159,6 +189,32 @@
             });
         }
     };
+    
+    return op;
+}
+
+-(__kindof ELNetworkOperation *)updatePropertiesOperationForRecord:(ELRecord *)record withPartialProperties:(NSDictionary<NSString*,id> *)recordProperties completionBlock:(nullable void (^)(ELRecord* _Nullable record, __kindof ELNetworkOperation *op))completionBlock
+{
+    ELJSONNetworkOperation *op = [[ELJSONNetworkOperation alloc] initWithMethod:@"PUT" urlString:[self absoluteURLStringWithPath:[[@"db" stringByAppendingPathComponent:[[record class] collectionName]] stringByAppendingPathComponent:record.identifier]] parameters:nil];
+    [[self class] setAdditionalHeadersFromWebServiceConnector:self toOperation:op];
+
+    op.responseBlock = ^(ELNetworkOperation *operation, id responseObject, NSError *error) {
+        if(!responseObject) {
+            if(completionBlock)
+                dispatch_async(self.completionQueue,^{
+                    completionBlock(nil, operation);
+                });
+            
+            return;
+        }
+        
+        if(completionBlock) {
+            dispatch_async(self.completionQueue,^{
+                completionBlock(responseObject, operation);
+            });
+        }
+    };
+
     
     return op;
 }

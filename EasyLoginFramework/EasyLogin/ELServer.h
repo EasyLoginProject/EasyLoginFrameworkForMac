@@ -27,8 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
 -(instancetype)initWithBaseURL:(NSURL *)baseURL; // creates a default ELWebServiceConnector that you can tweak.
 
 -(void)createNewRecordWithEntityClass:(Class<ELRecordProtocol>)entityClass properties:(ELRecordProperties*)properties/*or do we want a basic NSDictionary?*/ completionBlock:(nullable void (^)(__kindof ELRecord* _Nullable newRecord, NSError * _Nullable error))completionBlock;
+
 -(void)getAllRecordsWithEntityClass:(Class<ELRecordProtocol>)entityClass completionBlock:(nullable void (^)(NSArray<__kindof ELRecord*> * _Nullable records, NSError * _Nullable error))completionBlock;
 -(void)getUpdatedRecord:(__kindof ELRecord*)record completionBlock:(nullable void (^)(__kindof ELRecord * _Nullable updatedRecord, NSError * _Nullable error))completionBlock; // updatedRecord may be nil if the record was deleted on the server?
+-(void)getRecordWithEntityClass:(Class<ELRecordProtocol>)entityClass andUniqueIdentifier:(NSString*)uniqueID completionBlock:(nullable void (^)(__kindof ELRecord * _Nullable record, NSError * _Nullable error))completionBlock; // updatedRecord may be nil if the record was deleted on the server?
+
+-(void)updateRecord:(__kindof ELRecord*)record withNewPassword:(NSString*)requestedPassword usingOldPassword:(NSString*)oldPassword completionBlock:(nullable void (^)(__kindof ELRecord * _Nullable updatedRecord, NSError * _Nullable error))completionBlock;
+
 
 @end
 
