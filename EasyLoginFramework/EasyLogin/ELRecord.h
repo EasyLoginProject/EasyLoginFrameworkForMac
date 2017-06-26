@@ -11,6 +11,10 @@
 #import "ELRecordProperties.h"
 #import "ELRecordProtocol.h"
 
+#define kELRecordAuthenticationMethodsKey @"authMethods"
+#define kELRecordAuthenticationMethodClearTextKey @"cleartext"
+#define kELRecordAuthenticationMethodSHA512Key @"SHA512"
+
 #define USE_OBJC_PROPERTIES 0 // 1 to automagically bridge between objc properties and ELRecordProperties
 
 @interface ELRecord : NSObject <NSSecureCoding, ELRecordProtocol>

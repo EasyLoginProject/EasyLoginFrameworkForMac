@@ -15,7 +15,6 @@
 #define kELUserPrincipalNameKey @"principalName"
 #define kELUserShortnameKey @"shortname"
 #define kELUserEmailKey @"email"
-#define kELUserAuthenticationMethodsKey @"authMethods"
 
 @interface ELUser : ELRecord
 
