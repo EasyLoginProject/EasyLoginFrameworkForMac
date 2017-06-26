@@ -24,6 +24,7 @@
 
 
 -(void)updateWithProperties:(nonnull ELRecordProperties*)updatedProperties deletes:(BOOL)deleteWhenAbsent kvoNotifier:(nullable id)kvoNotifier;
+-(nonnull ELRecordProperties*)differenceWithProperties:(nonnull ELRecordProperties*)otherProperties deletes:(BOOL)deleteWhenAbsent;
 
 @end
 

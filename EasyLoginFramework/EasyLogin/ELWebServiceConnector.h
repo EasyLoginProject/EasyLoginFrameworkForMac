@@ -33,19 +33,15 @@ NS_ASSUME_NONNULL_BEGIN
 -(__kindof ELNetworkOperation *)getAllRecordsOperationRelatedToEntityClass:(Class<ELRecordProtocol>)entityClass withCompletionBlock:(nullable void (^)(NSArray<ELRecord*> * _Nullable records, __kindof ELNetworkOperation *op))completionBlock;
 -(nullable __kindof ELNetworkOperation *)createNewRecordOperationRelatedToEntityClass:(Class<ELRecordProtocol>)entityClass withDictionary:(NSDictionary<NSString*,id> *)recordInfo completionBlock:(nullable void (^)(ELRecord* _Nullable record, __kindof ELNetworkOperation *op))completionBlock;
 -(__kindof ELNetworkOperation *)getRecordOperationWithEntityClass:(Class<ELRecordProtocol>)entityClass andRecordIdentifier:(NSString*)recordIdentifier withCompletionBlock:(nullable void (^)(ELRecord* _Nullable record, __kindof ELNetworkOperation *op))completionBlock;
--(__kindof ELNetworkOperation *)getPropertiesOperationForRecord:(ELRecord *)record completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable userProperties, __kindof ELNetworkOperation *op))completionBlock;
--(__kindof ELNetworkOperation *)updatePropertiesOperationForRecord:(ELRecord *)record withPartialProperties:(NSDictionary<NSString*,id> *)recordProperties completionBlock:(nullable void (^)(ELRecord* _Nullable record, __kindof ELNetworkOperation *op))completionBlock;
+-(__kindof ELNetworkOperation *)getPropertiesOperationForRecord:(ELRecord *)record completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable recordProperties, __kindof ELNetworkOperation *op))completionBlock;
 
-//-(__kindof ELNetworkOperation *)updateRecord:(ELRecord *)record withPartialProperties:(NSDictionary<NSString*,id> *)recordProperties completionBlock:(nullable void (^)(ELRecord* _Nullable record, NSError* _Nullable error, __kindof ELNetworkOperation *op))completionBlock;
-
+-(__kindof ELNetworkOperation *)updatePropertiesOperationForRecord:(ELRecord *)record withUpdatedProperties:(NSDictionary<NSString*,id> *)recordUpdatedProperties completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable recordProperties, __kindof ELNetworkOperation *op))completionBlock; // recordUpdatedProperties should only contains *changed* properties. May also contain [NSNull null] values to remove entries.
 
 #pragma mark - User Operations
 
--(__kindof ELNetworkOperation *)getAllUsersOperationWithCompletionBlock:(nullable void (^)(NSArray<ELUser*> * _Nullable users, __kindof ELNetworkOperation *op))completionBlock;
--(nullable __kindof ELNetworkOperation *)createNewUserOperationWithDictionary:(NSDictionary<NSString*,id> *)newUserDictionary completionBlock:(nullable void (^)(ELUser* _Nullable user, __kindof ELNetworkOperation *op))completionBlock;
--(__kindof ELNetworkOperation *)getUserPropertiesOperationForUserIdentifier:(NSString *)userIdentifier completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable userProperties, __kindof ELNetworkOperation *op))completionBlock;
-//-(__kindof ELNetworkOperation *)updatePropertiesOperation:(NSDictionary<NSString*,id> *)userPropertiesDictionary forUserUniqueId:(NSString *)userUniqueId completionBlock:(nullable void (^)(ELUser* _Nullable updatedUser, __kindof ELNetworkOperation *op))completionBlock; // or updatedPropertiesOperationWithProperties:forUserIdentifier? <- clunky
-//-(__kindof ELNetworkOperation *)deleteUserOperationForUserIdentifier:(NSString *)userIdentifier completionBlock:(nullable void (^)(BOOL deleted, __kindof ELNetworkOperation *op))completionBlock;
+-(__kindof ELNetworkOperation *)getAllUsersOperationWithCompletionBlock:(nullable void (^)(NSArray<ELUser*> * _Nullable users, __kindof ELNetworkOperation *op))completionBlock __attribute__((deprecated));
+-(nullable __kindof ELNetworkOperation *)createNewUserOperationWithDictionary:(NSDictionary<NSString*,id> *)newUserDictionary completionBlock:(nullable void (^)(ELUser* _Nullable user, __kindof ELNetworkOperation *op))completionBlock __attribute__((deprecated));
+-(__kindof ELNetworkOperation *)getUserPropertiesOperationForUserIdentifier:(NSString *)userIdentifier completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable userProperties, __kindof ELNetworkOperation *op))completionBlock __attribute__((deprecated));
 
 #pragma mark UserGroups Operations
 

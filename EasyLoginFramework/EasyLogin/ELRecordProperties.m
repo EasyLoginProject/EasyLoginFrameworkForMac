@@ -105,6 +105,38 @@
     }];
 }
 
+-(nonnull ELRecordProperties*)differenceWithProperties:(nonnull ELRecordProperties*)otherProperties deletes:(BOOL)deleteWhenAbsent
+{
+    NSParameterAssert((otherProperties.mapping == nil && self.mapping == nil) || [otherProperties.mappingName isEqualToString:self.mappingName]); // until we can isEqual: on 2 mappings...
+    
+    NSMutableDictionary *keptProperties = [NSMutableDictionary dictionary];
+    NSDictionary *otherPropertiesDictionary = [otherProperties dictionaryRepresentation];
+    
+    // entries added not in otherProperties or different is otherProperties
+    [_internalDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull value, BOOL * _Nonnull stop) {
+        id otherValue = otherPropertiesDictionary[key];
+        if(otherValue == nil) {
+            if(deleteWhenAbsent) {
+               keptProperties[key] = [NSNull null];
+            }
+        }
+        else if(![otherValue isEqual:value]) {
+            keptProperties[key] = otherValue;
+        }
+    }];
+
+    // entries added to otherProperties
+    [otherPropertiesDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull otherKey, id  _Nonnull otherValue, BOOL * _Nonnull stop) {
+        id value = _internalDictionary[otherKey];
+        if(value == nil) {
+            keptProperties[otherKey] = otherValue;
+        }
+    }];
+    
+    ELRecordProperties *difference = [[ELRecordProperties alloc] initWithDictionary:keptProperties mapping:_mapping];
+    return difference;
+}
+
 -(NSDictionary *)dictionaryRepresentation
 {
     return [NSDictionary dictionaryWithDictionary:_internalDictionary];
