@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F840C3291F01A15900FFADF8 /* EasyLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F840C3281F01A15900FFADF8 /* EasyLogin.framework */; };
 		F86795971EF5A8D8008FDC1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F86795961EF5A8D8008FDC1B /* main.m */; };
 		F86795A81EF5A96C008FDC1B /* ControlCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = F86795A71EF5A96C008FDC1B /* ControlCommand.m */; };
-		F8F159EA1F0105B500DF65F1 /* EasyLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F159E91F0105B500DF65F1 /* EasyLogin.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F840C3281F01A15900FFADF8 /* EasyLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EasyLogin.framework; path = ../../../../../../../Library/Frameworks/EasyLogin.framework; sourceTree = "<group>"; };
 		F86795931EF5A8D8008FDC1B /* elctl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = elctl; sourceTree = BUILT_PRODUCTS_DIR; };
 		F86795961EF5A8D8008FDC1B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F86795A61EF5A96C008FDC1B /* ControlCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlCommand.h; sourceTree = "<group>"; };
@@ -37,7 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8F159EA1F0105B500DF65F1 /* EasyLogin.framework in Frameworks */,
+				F840C3291F01A15900FFADF8 /* EasyLogin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +75,7 @@
 		F8F159E81F0105B500DF65F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F840C3281F01A15900FFADF8 /* EasyLogin.framework */,
 				F8F159E91F0105B500DF65F1 /* EasyLogin.framework */,
 			);
 			name = Frameworks;
@@ -238,6 +240,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = JXHB9UP6QZ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -246,6 +252,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = JXHB9UP6QZ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
