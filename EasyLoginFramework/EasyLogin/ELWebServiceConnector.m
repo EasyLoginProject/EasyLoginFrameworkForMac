@@ -150,10 +150,11 @@
             return;
         }
         
+        ELRecord *record = [entityClass newRecordWithProperties:[ELRecordProperties recordPropertiesWithDictionary:responseObject mapping:nil]];
         // TODO: remove 'type' entry ? any root object ?
         if(completionBlock) {
             dispatch_async(self.completionQueue,^{
-                completionBlock(responseObject, operation);
+                completionBlock(record, operation);
             });
         }
     };
