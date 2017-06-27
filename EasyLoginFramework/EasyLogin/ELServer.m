@@ -72,6 +72,7 @@
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
     NSLog(@"EasyLogin connected with success to server update stream");
+    [[NSNotificationCenter defaultCenter] postNotificationName:kELServerUpdateNotification object:self];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
