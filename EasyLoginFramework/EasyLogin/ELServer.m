@@ -161,7 +161,7 @@
     [_connector enqueueOperation:op];
 }
 
--(void)updateRecord:(ELRecord*)record withUpdatedProperties:(ELRecordProperties*)updatedProperties completionBlock:(nullable void (^)(BOOL success, NSError * _Nullable error))completionBlock // success may be NO if the record was deleted on the server?
+-(void)updateRecord:(ELRecord*)record withUpdatedProperties:(ELRecordProperties*)updatedProperties completionBlock:(nullable void (^)(__kindof ELRecord * _Nullable record, BOOL success, NSError * _Nullable error))completionBlock // success may be NO if the record was deleted on the server?
 {
     if([record.recordEntity isEqualToString:[ELRecord recordEntity]]) {
         [NSException raise:NSInvalidArgumentException format:@"Invalid entity"];
@@ -169,26 +169,29 @@
     
     ELNetworkOperation *op = [_connector updatePropertiesOperationForRecord:record withUpdatedProperties:[updatedProperties dictionaryRepresentation] completionBlock:^(NSDictionary<NSString*,id> * _Nullable recordProperties, __kindof ELNetworkOperation * _Nonnull op) {
         if(recordProperties == nil) {
-            if(completionBlock) completionBlock(NO, op.error); // the record may have been deleted? treat this as a special case? maybe not an error?
+            if(completionBlock) completionBlock(record, NO, op.error); // the record may have been deleted? treat this as a special case? maybe not an error?
             
             return;
         }
         
-        if(completionBlock) completionBlock(YES, nil);
+        [record updateWithProperties:[ELRecordProperties recordPropertiesWithDictionary:recordProperties mapping:nil] deletes:YES];
+        
+        if(completionBlock) completionBlock(record, YES, nil);
     }];
     [_connector enqueueOperation:op];
 }
 
--(void)updateRecord:(__kindof ELRecord*)record withNewPassword:(NSString*)requestedPassword usingOldPassword:(NSString*)oldPassword completionBlock:(nullable void (^)(BOOL success, NSError * _Nullable error))completionBlock
+-(void)updateRecord:(__kindof ELRecord*)record withNewPassword:(NSString*)requestedPassword usingOldPassword:(NSString*)oldPassword completionBlock:(nullable void (^)(__kindof ELRecord * _Nullable record, BOOL success, NSError * _Nullable error))completionBlock
 {
     ELNetworkOperation *op = [_connector updatePropertiesOperationForRecord:record
                                                       withUpdatedProperties:@{kELRecordAuthenticationMethodsKey: @{kELRecordAuthenticationMethodClearTextKey: requestedPassword}}
                                                             completionBlock:^(NSDictionary<NSString *,id> * _Nullable recordProperties, __kindof ELNetworkOperation * _Nonnull op) {
                                                                     if(recordProperties == nil) {
-                                                                        if(completionBlock) completionBlock(NO, op.error);
+                                                                        if(completionBlock) completionBlock(record, NO, op.error);
                                                                     }
                                                                     else {
-                                                                        if(completionBlock) completionBlock(YES, op.error);
+                                                                        [record updateWithProperties:[ELRecordProperties recordPropertiesWithDictionary:recordProperties mapping:nil] deletes:YES];
+                                                                        if(completionBlock) completionBlock(record, YES, op.error);
                                                                     }                                                            
                                                             }];
     

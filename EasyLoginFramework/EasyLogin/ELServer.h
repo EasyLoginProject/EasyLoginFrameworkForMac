@@ -33,9 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)getRecordWithEntityClass:(Class<ELRecordProtocol>)entityClass andUniqueIdentifier:(NSString*)uniqueID completionBlock:(nullable void (^)(__kindof ELRecord * _Nullable record, NSError * _Nullable error))completionBlock; // updatedRecord may be nil if the record was deleted on the server?
 
--(void)updateRecord:(ELRecord*)record withUpdatedProperties:(ELRecordProperties*)updatedProperties completionBlock:(nullable void (^)(BOOL success, NSError * _Nullable error))completionBlock; // success may be NO if the record was deleted on the server?
+-(void)updateRecord:(ELRecord*)record withUpdatedProperties:(ELRecordProperties*)updatedProperties completionBlock:(nullable void (^)(__kindof ELRecord * _Nullable record, BOOL success, NSError * _Nullable error))completionBlock; // success may be NO if the record was deleted on the server?
 
--(void)updateRecord:(__kindof ELRecord*)record withNewPassword:(NSString*)requestedPassword usingOldPassword:(NSString*)oldPassword completionBlock:(nullable void (^)(BOOL success, NSError * _Nullable error))completionBlock;
+-(void)updateRecord:(__kindof ELRecord*)record withNewPassword:(NSString*)requestedPassword usingOldPassword:(NSString*)oldPassword completionBlock:(nullable void (^)(__kindof ELRecord * _Nullable record, BOOL success, NSError * _Nullable error))completionBlock;
 
 @end
 
