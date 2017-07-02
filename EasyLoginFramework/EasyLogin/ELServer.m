@@ -63,6 +63,7 @@
         return;
     }
     
+    NSLog(@"EasyLogin try to connect to server update stream");
     NSURL *wsURL = [NSURL URLWithString:[NSString stringWithFormat:@"/notifications"]
                           relativeToURL:self.baseURL];
     self.webSocket = [[SRWebSocket alloc] initWithURL:wsURL];
