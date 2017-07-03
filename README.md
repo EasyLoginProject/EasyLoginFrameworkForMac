@@ -1,4 +1,4 @@
-#EasyLogin framwork for Mac
+# EasyLogin framwork for Mac
 
 This framework offer two services:
 * Cocoa adapters to talk with the server
