@@ -169,12 +169,16 @@
 
 -(void)setValue:(id)value forKey:(NSString *)key
 {
+    [self willChangeValueForKey:key];
     [_internalDictionary setValue:value forKey:key];
+    [self didChangeValueForKey:key];
 }
 
 -(void)setValue:(id)value forKeyPath:(NSString *)keyPath
 {
+    [self willChangeValueForKey:keyPath];
     [_internalDictionary setValue:value forKeyPath:keyPath];
+    [self didChangeValueForKey:keyPath];
 }
 
 @end
