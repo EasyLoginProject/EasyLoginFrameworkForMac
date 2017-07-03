@@ -37,15 +37,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(__kindof ELNetworkOperation *)updatePropertiesOperationForRecord:(ELRecord *)record withUpdatedProperties:(NSDictionary<NSString*,id> *)recordUpdatedProperties completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable recordProperties, __kindof ELNetworkOperation *op))completionBlock; // recordUpdatedProperties should only contains *changed* properties. May also contain [NSNull null] values to remove entries.
 
-#pragma mark - User Operations
+-(__kindof ELNetworkOperation *)deleteOperationForRecord:(ELRecord *)record completionBlock:(nullable void (^)(BOOL success, __kindof ELNetworkOperation *op))completionBlock; 
 
--(__kindof ELNetworkOperation *)getAllUsersOperationWithCompletionBlock:(nullable void (^)(NSArray<ELUser*> * _Nullable users, __kindof ELNetworkOperation *op))completionBlock __attribute__((deprecated));
--(nullable __kindof ELNetworkOperation *)createNewUserOperationWithDictionary:(NSDictionary<NSString*,id> *)newUserDictionary completionBlock:(nullable void (^)(ELUser* _Nullable user, __kindof ELNetworkOperation *op))completionBlock __attribute__((deprecated));
--(__kindof ELNetworkOperation *)getUserPropertiesOperationForUserIdentifier:(NSString *)userIdentifier completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable userProperties, __kindof ELNetworkOperation *op))completionBlock __attribute__((deprecated));
-
-#pragma mark UserGroups Operations
-
-#pragma mark Roles Operations
+//#pragma mark - User Operations
+//
+//-(__kindof ELNetworkOperation *)getAllUsersOperationWithCompletionBlock:(nullable void (^)(NSArray<ELUser*> * _Nullable users, __kindof ELNetworkOperation *op))completionBlock __attribute__((deprecated));
+//-(nullable __kindof ELNetworkOperation *)createNewUserOperationWithDictionary:(NSDictionary<NSString*,id> *)newUserDictionary completionBlock:(nullable void (^)(ELUser* _Nullable user, __kindof ELNetworkOperation *op))completionBlock __attribute__((deprecated));
+//-(__kindof ELNetworkOperation *)getUserPropertiesOperationForUserIdentifier:(NSString *)userIdentifier completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable userProperties, __kindof ELNetworkOperation *op))completionBlock __attribute__((deprecated));
+//
+//#pragma mark UserGroups Operations
+//
+//#pragma mark Roles Operations
 
 
 #pragma mark - enqueing

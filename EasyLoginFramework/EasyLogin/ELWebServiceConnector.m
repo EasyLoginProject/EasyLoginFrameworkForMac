@@ -235,120 +235,151 @@
     return op;
 }
 
-#pragma mark - User Operations
-
--(__kindof ELNetworkOperation *)getAllUsersOperationWithCompletionBlock:(nullable void (^)(NSArray<ELUser*> * _Nullable users, __kindof ELNetworkOperation *op))completionBlock
+-(__kindof ELNetworkOperation *)deleteOperationForRecord:(ELRecord *)record completionBlock:(nullable void (^)(BOOL success, __kindof ELNetworkOperation *op))completionBlock;
 {
-    ELJSONNetworkOperation *op = [[ELJSONNetworkOperation alloc] initWithMethod:@"GET" urlString:[self absoluteURLStringWithPath:@"db/users"] parameters:nil];
+    NSParameterAssert(record.identifier != nil);
+    
+    ELNetworkOperation *op = [[ELNetworkOperation alloc] initWithMethod:@"DELETE" urlString:[self absoluteURLStringWithPath:[[@"db" stringByAppendingPathComponent:[[record class] collectionName]] stringByAppendingPathComponent:record.identifier]] parameters:nil];
+    op.allowEmptyResponse = YES;
     
     // set any custom operation header fields, then call setAdditionalHeadersFromWebServiceConnector:toOperation: to complete (and avoid overriding of headers)
     //op.additionalHeaders = @{"mycustomfield" : @"mycustomvalue"};
+    //op.additionalHeaders = @{@"Content-Type" : @"application/json"}; // should not be necessary for DELETE
     [[self class] setAdditionalHeadersFromWebServiceConnector:self toOperation:op];
     
     op.responseBlock = ^(ELNetworkOperation *operation, id responseObject, NSError *error) {
-        if(!responseObject) {
+        if(!error) {
             if(completionBlock)
                 dispatch_async(self.completionQueue,^{
-                    completionBlock(nil, operation);
+                    completionBlock(YES, operation);
                 });
-            
-            return;
         }
-        
-        NSMutableArray<ELUser*> *allUsers = [NSMutableArray array];
-        [responseObject[@"users"] enumerateObjectsUsingBlock:^(NSDictionary*  _Nonnull userDictionary, NSUInteger idx, BOOL * _Nonnull stop) {
-            ELUser *user = [[ELUser alloc] initWithProperties:[ELRecordProperties recordPropertiesWithDictionary:userDictionary mapping:nil]];
-            if(user) {
-                [allUsers addObject:user];
+        else {
+            if(completionBlock) {
+                dispatch_async(self.completionQueue,^{
+                    completionBlock(NO, operation);
+                });
             }
-        }];
-        
-        if(completionBlock) {
-            dispatch_async(self.completionQueue,^{
-                completionBlock(allUsers, operation);
-            });
         }
     };
     
     return op;
 }
 
--(nullable __kindof ELNetworkOperation *)createNewUserOperationWithDictionary:(NSDictionary<NSString*,id> *)newUserDictionary completionBlock:(nullable void (^)(ELUser* _Nullable user, __kindof ELNetworkOperation *op))completionBlock
-{
-    NSParameterAssert(newUserDictionary[@"uuid"] == nil);
-                      
-    ELJSONNetworkOperation *op = [[ELJSONNetworkOperation alloc] initWithMethod:@"POST" urlString:[self absoluteURLStringWithPath:@"db/users"] parameters:nil];
-    
-    NSError *jsonError;
-    op.body = [NSJSONSerialization dataWithJSONObject:newUserDictionary options:0 error:&jsonError];
-    if(op.body == nil && completionBlock) {
-        op.error = jsonError;
-        dispatch_async(self.completionQueue,^{
-            completionBlock(nil, op);
-        });
-        
-        return nil;
-    }
-    // set any custom operation header fields, then call setAdditionalHeadersFromWebServiceConnector:toOperation: to complete (and avoid overriding of headers)
-    //op.additionalHeaders = @{"mycustomfield" : @"mycustomvalue"};
-    op.additionalHeaders = @{@"Content-Type" : @"application/json"};
-    [[self class] setAdditionalHeadersFromWebServiceConnector:self toOperation:op];
-    
-    op.responseBlock = ^(ELNetworkOperation *operation, id responseObject, NSError *error) {
-        if(!responseObject) {
-            if(completionBlock)
-                dispatch_async(self.completionQueue,^{
-                    completionBlock(nil, operation);
-                });
-            
-            return;
-        }
-        
-        //NSAssert([responseObject[@"type"] isEqualToString:@"user"], @"Invalid 'type' value returned by WebService. Should have been 'user'");
-        
-        // TODO: remove 'type' entry ? any root object?
-        ELUser *user = [[ELUser alloc] initWithProperties:[ELRecordProperties recordPropertiesWithDictionary:responseObject mapping:nil]];
-        
-        if(completionBlock) {
-            dispatch_async(self.completionQueue,^{
-                completionBlock(user, operation);
-            });
-        }
-    };
-    
-    return op;
-}
-
--(__kindof ELNetworkOperation *)getUserPropertiesOperationForUserIdentifier:(NSString *)userIdentifier completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable userProperties, __kindof ELNetworkOperation *op))completionBlock
-{
-    NSParameterAssert(userIdentifier != nil);
-    
-    ELJSONNetworkOperation *op = [[ELJSONNetworkOperation alloc] initWithMethod:@"GET" urlString:[self absoluteURLStringWithPath:[@"db/users" stringByAppendingPathComponent:userIdentifier]] parameters:nil];
-    
-    // set any custom operation header fields, then call setAdditionalHeadersFromWebServiceConnector:toOperation: to complete (and avoid overriding of headers)
-    //op.additionalHeaders = @{"mycustomfield" : @"mycustomvalue"};
-    [[self class] setAdditionalHeadersFromWebServiceConnector:self toOperation:op];
-    
-    op.responseBlock = ^(ELNetworkOperation *operation, id responseObject, NSError *error) {
-        if(!responseObject) {
-            if(completionBlock)
-                dispatch_async(self.completionQueue,^{
-                    completionBlock(nil, operation);
-                });
-            
-            return;
-        }
-        
-        // TODO: remove 'type' entry ? any root object ?
-        if(completionBlock) {
-            dispatch_async(self.completionQueue,^{
-                completionBlock(responseObject, operation);
-            });
-        }
-    };
-    
-    return op;
-}
+//#pragma mark - User Operations
+//
+//-(__kindof ELNetworkOperation *)getAllUsersOperationWithCompletionBlock:(nullable void (^)(NSArray<ELUser*> * _Nullable users, __kindof ELNetworkOperation *op))completionBlock
+//{
+//    ELJSONNetworkOperation *op = [[ELJSONNetworkOperation alloc] initWithMethod:@"GET" urlString:[self absoluteURLStringWithPath:@"db/users"] parameters:nil];
+//    
+//    // set any custom operation header fields, then call setAdditionalHeadersFromWebServiceConnector:toOperation: to complete (and avoid overriding of headers)
+//    //op.additionalHeaders = @{"mycustomfield" : @"mycustomvalue"};
+//    [[self class] setAdditionalHeadersFromWebServiceConnector:self toOperation:op];
+//    
+//    op.responseBlock = ^(ELNetworkOperation *operation, id responseObject, NSError *error) {
+//        if(!responseObject) {
+//            if(completionBlock)
+//                dispatch_async(self.completionQueue,^{
+//                    completionBlock(nil, operation);
+//                });
+//            
+//            return;
+//        }
+//        
+//        NSMutableArray<ELUser*> *allUsers = [NSMutableArray array];
+//        [responseObject[@"users"] enumerateObjectsUsingBlock:^(NSDictionary*  _Nonnull userDictionary, NSUInteger idx, BOOL * _Nonnull stop) {
+//            ELUser *user = [[ELUser alloc] initWithProperties:[ELRecordProperties recordPropertiesWithDictionary:userDictionary mapping:nil]];
+//            if(user) {
+//                [allUsers addObject:user];
+//            }
+//        }];
+//        
+//        if(completionBlock) {
+//            dispatch_async(self.completionQueue,^{
+//                completionBlock(allUsers, operation);
+//            });
+//        }
+//    };
+//    
+//    return op;
+//}
+//
+//-(nullable __kindof ELNetworkOperation *)createNewUserOperationWithDictionary:(NSDictionary<NSString*,id> *)newUserDictionary completionBlock:(nullable void (^)(ELUser* _Nullable user, __kindof ELNetworkOperation *op))completionBlock
+//{
+//    NSParameterAssert(newUserDictionary[@"uuid"] == nil);
+//                      
+//    ELJSONNetworkOperation *op = [[ELJSONNetworkOperation alloc] initWithMethod:@"POST" urlString:[self absoluteURLStringWithPath:@"db/users"] parameters:nil];
+//    
+//    NSError *jsonError;
+//    op.body = [NSJSONSerialization dataWithJSONObject:newUserDictionary options:0 error:&jsonError];
+//    if(op.body == nil && completionBlock) {
+//        op.error = jsonError;
+//        dispatch_async(self.completionQueue,^{
+//            completionBlock(nil, op);
+//        });
+//        
+//        return nil;
+//    }
+//    // set any custom operation header fields, then call setAdditionalHeadersFromWebServiceConnector:toOperation: to complete (and avoid overriding of headers)
+//    //op.additionalHeaders = @{"mycustomfield" : @"mycustomvalue"};
+//    op.additionalHeaders = @{@"Content-Type" : @"application/json"};
+//    [[self class] setAdditionalHeadersFromWebServiceConnector:self toOperation:op];
+//    
+//    op.responseBlock = ^(ELNetworkOperation *operation, id responseObject, NSError *error) {
+//        if(!responseObject) {
+//            if(completionBlock)
+//                dispatch_async(self.completionQueue,^{
+//                    completionBlock(nil, operation);
+//                });
+//            
+//            return;
+//        }
+//        
+//        //NSAssert([responseObject[@"type"] isEqualToString:@"user"], @"Invalid 'type' value returned by WebService. Should have been 'user'");
+//        
+//        // TODO: remove 'type' entry ? any root object?
+//        ELUser *user = [[ELUser alloc] initWithProperties:[ELRecordProperties recordPropertiesWithDictionary:responseObject mapping:nil]];
+//        
+//        if(completionBlock) {
+//            dispatch_async(self.completionQueue,^{
+//                completionBlock(user, operation);
+//            });
+//        }
+//    };
+//    
+//    return op;
+//}
+//
+//-(__kindof ELNetworkOperation *)getUserPropertiesOperationForUserIdentifier:(NSString *)userIdentifier completionBlock:(nullable void (^)(NSDictionary<NSString*,id> * _Nullable userProperties, __kindof ELNetworkOperation *op))completionBlock
+//{
+//    NSParameterAssert(userIdentifier != nil);
+//    
+//    ELJSONNetworkOperation *op = [[ELJSONNetworkOperation alloc] initWithMethod:@"GET" urlString:[self absoluteURLStringWithPath:[@"db/users" stringByAppendingPathComponent:userIdentifier]] parameters:nil];
+//    
+//    // set any custom operation header fields, then call setAdditionalHeadersFromWebServiceConnector:toOperation: to complete (and avoid overriding of headers)
+//    //op.additionalHeaders = @{"mycustomfield" : @"mycustomvalue"};
+//    [[self class] setAdditionalHeadersFromWebServiceConnector:self toOperation:op];
+//    
+//    op.responseBlock = ^(ELNetworkOperation *operation, id responseObject, NSError *error) {
+//        if(!responseObject) {
+//            if(completionBlock)
+//                dispatch_async(self.completionQueue,^{
+//                    completionBlock(nil, operation);
+//                });
+//            
+//            return;
+//        }
+//        
+//        // TODO: remove 'type' entry ? any root object ?
+//        if(completionBlock) {
+//            dispatch_async(self.completionQueue,^{
+//                completionBlock(responseObject, operation);
+//            });
+//        }
+//    };
+//    
+//    return op;
+//}
 
 
 #pragma mark - Queue - Enqueue

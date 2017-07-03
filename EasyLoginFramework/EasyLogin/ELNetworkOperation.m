@@ -86,8 +86,6 @@
         return;
     }
     
-    self.incomingData = [NSMutableData data];
-    
     self.sessionTask = [self.localURLSession dataTaskWithRequest:self.request];
     [self.sessionTask resume];
 }
@@ -143,7 +141,7 @@
     if(self.response.statusCode < 200 || self.response.statusCode > 300)
     {
 #if DEBUG
-        NSLog(@"%s - status code:%ld (%@) for request URL:%@",__PRETTY_FUNCTION__,(long)self.response.statusCode, [NSHTTPURLResponse localizedStringForStatusCode:self.response.statusCode], self.request.URL);
+        NSLog(@"%s - status code:%ld (%@) for request (%@) URL:%@",__PRETTY_FUNCTION__,(long)self.response.statusCode, [NSHTTPURLResponse localizedStringForStatusCode:self.response.statusCode], self.request.HTTPMethod, self.request.URL);
 #endif
         if(error) {
             // NOTE: we were replacing the response.statusCode value by NSURLErrorBadServerResponse. This may be a mistake since it may be significant of the error!
@@ -329,6 +327,9 @@
         self.progress.totalUnitCount = dataTask.countOfBytesExpectedToReceive; // value has already been set in didReceiveResponse: anyway
     }
     
+    if(_incomingData == nil) {
+        self.incomingData = [NSMutableData data];
+    }
     [_incomingData appendData:data];
     
     if(self.progress.totalUnitCount > 0) {

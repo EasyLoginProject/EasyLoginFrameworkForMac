@@ -18,7 +18,7 @@ typedef NSData * _Nullable (^ELNetworkOperationBodyBuilderBlock_t)(void);
 
 @interface ELNetworkOperation : NSOperation <NSURLSessionDelegate, NSURLSessionDataDelegate, NSURLSessionTaskDelegate, NSProgressReporting>
 
-@property(strong, readonly) NSMutableData *incomingData;
+@property(strong, nullable, readonly) NSMutableData *incomingData;
 @property(strong, nonatomic) NSURLSessionConfiguration *localConfig; // default to NSURLSessionConfiguration.defaultSessionConfiguration()
 @property(readonly, copy) NSString *method; // POST, GET, DELETE...
 @property(readonly, copy) NSString *urlString; // http://www.mywebservice.com/api/v2
