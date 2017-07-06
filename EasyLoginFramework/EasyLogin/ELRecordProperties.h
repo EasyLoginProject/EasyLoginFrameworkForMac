@@ -23,7 +23,7 @@
 - (nullable id)objectForKeyedSubscript:(nonnull id)aKey;
 
 
--(void)updateWithProperties:(nonnull ELRecordProperties*)updatedProperties deletes:(BOOL)deleteWhenAbsent kvoNotifier:(nullable id)kvoNotifier;
+-(void)updateWithProperties:(nonnull ELRecordProperties*)updatedProperties deletes:(BOOL)deleteWhenAbsent kvoNotifier:(nullable id)kvoNotifier; // kvoNotifier allows the KVO poster to be custom, such as the ELRecord owner or the receiver
 -(nonnull ELRecordProperties*)differenceWithProperties:(nonnull ELRecordProperties*)otherProperties deletes:(BOOL)deleteWhenAbsent;
 
 @end
