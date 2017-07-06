@@ -336,7 +336,10 @@
             if ([@"number" isEqualToString:equalityRule]) {
                 NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
                 
-                valueConverterForComparaison = ^id(NSString*originalValue) {
+                valueConverterForComparaison = ^id(id originalValue) {
+                    if ([originalValue isKindOfClass:[NSNumber class]]) {
+                        return originalValue;
+                    }
                     return [numberFormatter numberFromString:originalValue];
                 };
             } else if ([@"time" isEqualToString:equalityRule]) {
