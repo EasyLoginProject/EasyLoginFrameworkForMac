@@ -415,8 +415,10 @@
     }
     
     if (processError) {
+        NSLog(@"Getting all registered records matching specific predicate done with error: %@", processError);
         completionHandler(nil, processError);
     } else {
+        NSLog(@"Getting all registered records matching specific predicate done with succes: %lu records returned", (unsigned long)[matchingRecords count]);
         completionHandler(matchingRecords, nil);
     }
     
