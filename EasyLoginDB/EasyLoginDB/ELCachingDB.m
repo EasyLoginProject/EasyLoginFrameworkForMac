@@ -431,13 +431,19 @@
     NSMutableArray *requestedRecords = [NSMutableArray new];
     
     for (NSDictionary *record in recordsForRequestedType) {
-        NSMutableDictionary *requestedRecord = [NSMutableDictionary new];
-        for (NSString* key in attributes) {
-            id requestedAttribute = [record objectForKey:key];
-            if (requestedAttribute) {
-                [requestedRecord setObject:requestedAttribute forKey:key];
+        NSMutableDictionary *requestedRecord = nil;
+        if (attributes) {
+            requestedRecord = [NSMutableDictionary new];
+            for (NSString* key in attributes) {
+                id requestedAttribute = [record objectForKey:key];
+                if (requestedAttribute) {
+                    [requestedRecord setObject:requestedAttribute forKey:key];
+                }
             }
+        } else {
+            requestedRecord = [NSMutableDictionary dictionaryWithDictionary:record];
         }
+        [requestedRecord setObject:recordType forKey:@"recordType"];
         [requestedRecords addObject:requestedRecord];
     }
     
