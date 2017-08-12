@@ -35,13 +35,6 @@
 
 @implementation ELNetworkOperation
 
-@synthesize finished = _finished; // render the finished property readwrite. But unfortunately NSOperationQueue is listening for "isFinished" notification instead of "finished" so we have to add a KVO dependency to "finished" keypath using keyPathsForValuesAffectingIsFinished
-
-+ (NSSet *) keyPathsForValuesAffectingIsFinished {
-    NSSet   *result = [NSSet setWithObject:@"finished"];
-    return result;
-}
-
 - (instancetype)initWithMethod:(NSString *)method urlString:(NSString *)urlString parameters:(nullable NSDictionary<NSString *, NSString *> *)requestParameters
 {
     self = [super init];
@@ -76,12 +69,7 @@
         [_localURLSession invalidateAndCancel];
         _localURLSession = nil;
         
-        dispatch_async(self.responseQueue, ^{
-            if(self.responseBlock) {
-                self.responseBlock(self, self.responseObject, self.error);
-                self.responseBlock = nil;
-            }
-        });
+        [self callResponseBlockAsynchronously];
         
         return;
     }
@@ -90,13 +78,20 @@
     [self.sessionTask resume];
 }
 
-//-(void)setFinished:(BOOL)finished
-//{
-//    // NSOperation overriding is difficult as the KVO key is "isFinished" and not "finished"
-//    [self willChangeValueForKey:@"isFinished"];
-//    _finished = finished;
-//    [self didChangeValueForKey:@"isFinished"];
-//}
+-(BOOL)isFinished
+{
+    return _finished;
+}
+
+-(void)setFinished:(BOOL)finished
+{
+    // NSOperation overriding is difficult as the KVO key is "isFinished" and not "finished"
+    @synchronized(self) {
+        [self willChangeValueForKey:@"isFinished"];
+        _finished = finished;
+        [self didChangeValueForKey:@"isFinished"];
+    }
+}
 
 -(NSURLSession *)localURLSession
 {
@@ -255,6 +250,16 @@
     return request;
 }
 
+-(void)callResponseBlockAsynchronously
+{
+    dispatch_async(self.responseQueue, ^{
+        if(self.responseBlock) {
+            self.responseBlock(self, self.responseObject, self.error);
+            self.responseBlock = nil;
+        }
+    });
+}
+
 #pragma mark - NSURLSession Delegate Methods
 
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
@@ -300,12 +305,7 @@
         self.finished = YES;
         
         // NOW HANDLED IN -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
-//        if(self.responseBlock) {
-//            dispatch_async(self.responseQueue, ^{
-//                self.responseBlock(self, self.responseObject, self.error);
-//                self.responseBlock = nil;
-//            });
-//        }
+        //[self callResponseBlockAsynchronously];
         
         return;
     }
@@ -365,12 +365,7 @@
         _localURLSession = nil;
         _sessionTask = nil;
         
-        if(self.responseBlock) {
-            dispatch_async(self.responseQueue, ^{
-                self.responseBlock(self, self.responseObject, self.error);
-                self.responseBlock = nil;
-            });
-        }
+        [self callResponseBlockAsynchronously];
         
         return;
     }
@@ -390,12 +385,7 @@
         _localURLSession = nil;
         _sessionTask = nil;
         
-        if(self.responseBlock) {
-            dispatch_async(self.responseQueue, ^{
-                self.responseBlock(self, self.responseObject, self.error);
-                self.responseBlock = nil;
-            });
-        }
+        [self callResponseBlockAsynchronously];
         
         return;
     }
@@ -412,13 +402,8 @@
     _localURLSession = nil;
     _sessionTask = nil;
     
-    if(self.responseBlock) {
-        dispatch_async(self.responseQueue, ^{
-            self.responseBlock(self, self.responseObject, self.error);
-            self.responseBlock = nil;
-        });
+    [self callResponseBlockAsynchronously];
     }
-}
 
 @end
 

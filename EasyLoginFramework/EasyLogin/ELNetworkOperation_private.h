@@ -11,6 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ELNetworkOperation ()
+{
+    // render the finished property readwrite. But unfortunately NSOperationQueue is listening for "isFinished" notification instead of "finished"
+    // Important note, as of iOS 11/macOS 10.3 it seems that changed: https://developer.apple.com/library/content/releasenotes/Foundation/RN-Foundation/index.html
+    BOOL _finished;
+}
 
 @property(strong, readwrite) NSMutableData *incomingData;
 @property(strong, nonatomic) NSURLSessionTask *sessionTask;
@@ -30,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(BOOL)validateResponse:(NSHTTPURLResponse *)response withError:(NSError **)error __attribute__((objc_requires_super));
 -(BOOL)processIncomingDataWithError:(NSError **)error;
+-(void)callResponseBlockAsynchronously;
 
 
 @end
