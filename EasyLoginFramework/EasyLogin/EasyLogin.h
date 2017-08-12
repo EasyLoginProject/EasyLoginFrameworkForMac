@@ -20,4 +20,11 @@
 #import <EasyLogin/ELNetworkOperation.h>
 #import <EasyLogin/ELWebServiceConnector.h>
 #import <EasyLogin/NSUserDefaults+EasyLoginSuite.h>
+#import <EasyLogin/ELRecordsProvider.h>
+#import <EasyLogin/ELLocalRecordsProvider.h>
+#import <EasyLogin/ELRemoteRecordsProvider.h>
+#import <EasyLogin/ELAbstractService.h>
+#import <EasyLogin/ELCloudService.h>
+#import <EasyLogin/ELLocalService.h>
+
 

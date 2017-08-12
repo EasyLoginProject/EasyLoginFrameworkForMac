@@ -33,6 +33,15 @@
 		F87E22601EE920B500CB14A0 /* ELCachingDBProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = F87E225E1EE920B500CB14A0 /* ELCachingDBProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F87E22651EE9214600CB14A0 /* ELCachingDBProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F87E22641EE9214600CB14A0 /* ELCachingDBProxy.m */; };
 		F87E226D1EE926DE00CB14A0 /* EasyLoginDB.xpc in Copy XPC Services */ = {isa = PBXBuildFile; fileRef = F87E226C1EE926D600CB14A0 /* EasyLoginDB.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F8B7F95C1F3DB573005C72C6 /* ELCloudService.h in Headers */ = {isa = PBXBuildFile; fileRef = F8B7F95A1F3DB573005C72C6 /* ELCloudService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8B7F95D1F3DB573005C72C6 /* ELCloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B7F95B1F3DB573005C72C6 /* ELCloudService.m */; };
+		F8B7F9661F3DB580005C72C6 /* ELLocalService.h in Headers */ = {isa = PBXBuildFile; fileRef = F8B7F9641F3DB580005C72C6 /* ELLocalService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8B7F9671F3DB580005C72C6 /* ELLocalService.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B7F9651F3DB580005C72C6 /* ELLocalService.m */; };
+		F8B7F96A1F3DB8E4005C72C6 /* ELAbstractService.h in Headers */ = {isa = PBXBuildFile; fileRef = F8B7F9681F3DB8E4005C72C6 /* ELAbstractService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8B7F96B1F3DB8E4005C72C6 /* ELAbstractService.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B7F9691F3DB8E4005C72C6 /* ELAbstractService.m */; };
+		F8B7F96C1F3DB945005C72C6 /* ELRecordsProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = F84458671F28A9E0000E7096 /* ELRecordsProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8B7F96D1F3DB945005C72C6 /* ELLocalRecordsProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = F84458681F28A9EB000E7096 /* ELLocalRecordsProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8B7F96E1F3DB945005C72C6 /* ELRemoteRecordsProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = F84458691F28A9F5000E7096 /* ELRemoteRecordsProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8DDF2F01EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F8DDF2EE1EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8DDF2F11EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DDF2EF1EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.m */; };
 		F8F159E11F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F159DF1F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -157,6 +166,9 @@
 		F81AE3031EFC09AF006D9983 /* ELWebServiceConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELWebServiceConnector.h; sourceTree = "<group>"; };
 		F81AE3041EFC09AF006D9983 /* ELWebServiceConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELWebServiceConnector.m; sourceTree = "<group>"; };
 		F81AE3351EFC1963006D9983 /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = ../Vendors/SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
+		F84458671F28A9E0000E7096 /* ELRecordsProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELRecordsProvider.h; sourceTree = "<group>"; };
+		F84458681F28A9EB000E7096 /* ELLocalRecordsProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELLocalRecordsProvider.h; sourceTree = "<group>"; };
+		F84458691F28A9F5000E7096 /* ELRemoteRecordsProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELRemoteRecordsProvider.h; sourceTree = "<group>"; };
 		F848227B1EF5B20700E6A518 /* ELCachingDBProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ELCachingDBProtocol.h; path = ../../EasyLoginDB/EasyLoginDB/ELCachingDBProtocol.h; sourceTree = "<group>"; };
 		F867959D1EF5A8D8008FDC1B /* elctl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = elctl.xcodeproj; path = ../elctl/elctl.xcodeproj; sourceTree = "<group>"; };
 		F87C58A51EFA4A7D00D791BD /* ELToolbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELToolbox.h; sourceTree = "<group>"; };
@@ -167,6 +179,13 @@
 		F87E225E1EE920B500CB14A0 /* ELCachingDBProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCachingDBProxy.h; sourceTree = "<group>"; };
 		F87E22641EE9214600CB14A0 /* ELCachingDBProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCachingDBProxy.m; sourceTree = "<group>"; };
 		F87E22671EE926D600CB14A0 /* EasyLoginDB.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EasyLoginDB.xcodeproj; path = ../EasyLoginDB/EasyLoginDB.xcodeproj; sourceTree = "<group>"; };
+		F8B7F95A1F3DB573005C72C6 /* ELCloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCloudService.h; sourceTree = "<group>"; };
+		F8B7F95B1F3DB573005C72C6 /* ELCloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCloudService.m; sourceTree = "<group>"; };
+		F8B7F9641F3DB580005C72C6 /* ELLocalService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELLocalService.h; sourceTree = "<group>"; };
+		F8B7F9651F3DB580005C72C6 /* ELLocalService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELLocalService.m; sourceTree = "<group>"; };
+		F8B7F9681F3DB8E4005C72C6 /* ELAbstractService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELAbstractService.h; sourceTree = "<group>"; };
+		F8B7F9691F3DB8E4005C72C6 /* ELAbstractService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELAbstractService.m; sourceTree = "<group>"; };
+		F8B7F96F1F3DB960005C72C6 /* ELAbstractService-Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ELAbstractService-Private.h"; sourceTree = "<group>"; };
 		F8DDF2EE1EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELAsyncBlockToManageAsOperation.h; sourceTree = "<group>"; };
 		F8DDF2EF1EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELAsyncBlockToManageAsOperation.m; sourceTree = "<group>"; };
 		F8F159DF1F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+EasyLoginSuite.h"; sourceTree = "<group>"; };
@@ -213,15 +232,6 @@
 				F81AE3171EFC0A14006D9983 /* Core */,
 				F81AE2FF1EFC09AF006D9983 /* ELServer.h */,
 				F81AE3001EFC09AF006D9983 /* ELServer.m */,
-				F81AE2FC1EFC09AF006D9983 /* ELRecordProperties.h */,
-				F81AE2FD1EFC09AF006D9983 /* ELRecordProperties.m */,
-				F81AE2FE1EFC09AF006D9983 /* ELRecordProtocol.h */,
-				F81AE2FA1EFC09AF006D9983 /* ELRecord.h */,
-				F81AE2FB1EFC09AF006D9983 /* ELRecord.m */,
-				F81AE2F81EFC09AF006D9983 /* ELDevice.h */,
-				F81AE2F91EFC09AF006D9983 /* ELDevice.m */,
-				F81AE3011EFC09AF006D9983 /* ELUser.h */,
-				F81AE3021EFC09AF006D9983 /* ELUser.m */,
 				F81AE3031EFC09AF006D9983 /* ELWebServiceConnector.h */,
 				F81AE3041EFC09AF006D9983 /* ELWebServiceConnector.m */,
 			);
@@ -261,6 +271,39 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F84458601F28A9C6000E7096 /* RecordsProviders */ = {
+			isa = PBXGroup;
+			children = (
+				F84458671F28A9E0000E7096 /* ELRecordsProvider.h */,
+				F84458681F28A9EB000E7096 /* ELLocalRecordsProvider.h */,
+				F84458691F28A9F5000E7096 /* ELRemoteRecordsProvider.h */,
+				F8B7F9681F3DB8E4005C72C6 /* ELAbstractService.h */,
+				F8B7F96F1F3DB960005C72C6 /* ELAbstractService-Private.h */,
+				F8B7F9691F3DB8E4005C72C6 /* ELAbstractService.m */,
+				F8B7F95A1F3DB573005C72C6 /* ELCloudService.h */,
+				F8B7F95B1F3DB573005C72C6 /* ELCloudService.m */,
+				F8B7F9641F3DB580005C72C6 /* ELLocalService.h */,
+				F8B7F9651F3DB580005C72C6 /* ELLocalService.m */,
+			);
+			name = RecordsProviders;
+			sourceTree = "<group>";
+		};
+		F844586A1F28AA47000E7096 /* Records */ = {
+			isa = PBXGroup;
+			children = (
+				F81AE2FC1EFC09AF006D9983 /* ELRecordProperties.h */,
+				F81AE2FD1EFC09AF006D9983 /* ELRecordProperties.m */,
+				F81AE2FE1EFC09AF006D9983 /* ELRecordProtocol.h */,
+				F81AE2FA1EFC09AF006D9983 /* ELRecord.h */,
+				F81AE2FB1EFC09AF006D9983 /* ELRecord.m */,
+				F81AE2F81EFC09AF006D9983 /* ELDevice.h */,
+				F81AE2F91EFC09AF006D9983 /* ELDevice.m */,
+				F81AE3011EFC09AF006D9983 /* ELUser.h */,
+				F81AE3021EFC09AF006D9983 /* ELUser.m */,
+			);
+			name = Records;
+			sourceTree = "<group>";
+		};
 		F867959E1EF5A8D8008FDC1B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,7 +334,9 @@
 		F87E22551EE8AC0F00CB14A0 /* EasyLogin */ = {
 			isa = PBXGroup;
 			children = (
+				F844586A1F28AA47000E7096 /* Records */,
 				F87E22561EE8AC0F00CB14A0 /* EasyLogin.h */,
+				F84458601F28A9C6000E7096 /* RecordsProviders */,
 				F81AE2F21EFC09A1006D9983 /* Network */,
 				F81AE2F11EFC0996006D9983 /* CachingDB */,
 				F81AE2F01EFC098B006D9983 /* Tools */,
@@ -318,6 +363,7 @@
 				F87E22581EE8AC0F00CB14A0 /* EasyLogin.h in Headers */,
 				F848227C1EF5B20700E6A518 /* ELCachingDBProtocol.h in Headers */,
 				F81AE3151EFC09AF006D9983 /* ELWebServiceConnector.h in Headers */,
+				F8B7F96C1F3DB945005C72C6 /* ELRecordsProvider.h in Headers */,
 				F81AE30C1EFC09AF006D9983 /* ELRecord.h in Headers */,
 				F87C58A71EFA4A7D00D791BD /* ELToolbox.h in Headers */,
 				F81AE3131EFC09AF006D9983 /* ELUser.h in Headers */,
@@ -325,12 +371,17 @@
 				F81AE30E1EFC09AF006D9983 /* ELRecordProperties.h in Headers */,
 				F81AE3101EFC09AF006D9983 /* ELRecordProtocol.h in Headers */,
 				F8DDF2F01EF59FFD00388CF5 /* ELAsyncBlockToManageAsOperation.h in Headers */,
+				F8B7F96E1F3DB945005C72C6 /* ELRemoteRecordsProvider.h in Headers */,
 				F81AE3051EFC09AF006D9983 /* ELJSONNetworkOperation.h in Headers */,
+				F8B7F96D1F3DB945005C72C6 /* ELLocalRecordsProvider.h in Headers */,
 				F81AE3071EFC09AF006D9983 /* ELNetworkOperation_private.h in Headers */,
+				F8B7F96A1F3DB8E4005C72C6 /* ELAbstractService.h in Headers */,
 				F81AE3081EFC09AF006D9983 /* ELNetworkOperation.h in Headers */,
+				F8B7F95C1F3DB573005C72C6 /* ELCloudService.h in Headers */,
 				F8F159E11F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.h in Headers */,
 				F81AE3111EFC09AF006D9983 /* ELServer.h in Headers */,
 				F81AE30A1EFC09AF006D9983 /* ELDevice.h in Headers */,
+				F8B7F9661F3DB580005C72C6 /* ELLocalService.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,9 +551,12 @@
 			files = (
 				F81AE30B1EFC09AF006D9983 /* ELDevice.m in Sources */,
 				F87C58A81EFA4A7D00D791BD /* ELToolbox.m in Sources */,
+				F8B7F95D1F3DB573005C72C6 /* ELCloudService.m in Sources */,
 				F8F159E21F00E98A00DF65F1 /* NSUserDefaults+EasyLoginSuite.m in Sources */,
 				F81AE30D1EFC09AF006D9983 /* ELRecord.m in Sources */,
 				F87E22651EE9214600CB14A0 /* ELCachingDBProxy.m in Sources */,
+				F8B7F96B1F3DB8E4005C72C6 /* ELAbstractService.m in Sources */,
+				F8B7F9671F3DB580005C72C6 /* ELLocalService.m in Sources */,
 				F81AE30F1EFC09AF006D9983 /* ELRecordProperties.m in Sources */,
 				F81AE3061EFC09AF006D9983 /* ELJSONNetworkOperation.m in Sources */,
 				F81AE3091EFC09AF006D9983 /* ELNetworkOperation.m in Sources */,
