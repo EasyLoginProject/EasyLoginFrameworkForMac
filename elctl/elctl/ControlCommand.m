@@ -13,6 +13,7 @@
 
 @interface ControlCommand ()
 
+@property NSString *source;
 @property NSString *action;
 @property NSString *recordType;
 @property NSString *recordUUID;
@@ -26,12 +27,23 @@
     self = [super init];
     if (self) {
         
+        self.source = [[NSUserDefaults standardUserDefaults] stringForKey:@"source"];
         self.action = [[NSUserDefaults standardUserDefaults] stringForKey:@"action"];
         self.recordType = [[NSUserDefaults standardUserDefaults] stringForKey:@"recordType"];
         self.recordUUID = [[NSUserDefaults standardUserDefaults] stringForKey:@"recordUUID"];
         
     }
     return self;
+}
+
+- (Class<ELRecordsProvider>)providerClass {
+    if ([self.source isEqualToString:@"cloud"]) {
+        return [ELCloudService class];
+    } else {
+        return [ELLocalService class];
+    }
+    
+    return [ELLocalService class];
 }
 
 - (int)run {
@@ -75,7 +87,7 @@
             
             return EXIT_FAILURE;
         }
-    
+        
         if ([self.recordUUID length] == 0) {
             fprintf(stderr, "You must specify a record UUID to run this action\n");
             
@@ -89,6 +101,41 @@
 }
 
 - (int)runListAction {
+    __block int exitStatus = EXIT_FAILURE;
+    NSArray *recordTypes = nil;
+    
+    if (self.recordType) {
+        recordTypes = @[self.recordType];
+    } else {
+        recordTypes = @[@"user", @"group"];
+    }
+    
+    [[[self providerClass] sharedInstance] setAlwaysUpdate:YES];
+    
+    for (NSString *recordType in recordTypes) {
+        fprintf(stdout, "Record of type: %s\n", [recordType UTF8String]);
+        [[ELAsyncBlockToManageAsOperation runOnSharedQueueOperationWithAsyncTask:^(ELAsyncBlockToManageAsOperation *currentOperation) {
+            [[[self providerClass] sharedInstance] getAllRecordsOfType:recordType
+                                                  andCompletionHandler:^(NSArray<ELRecord*> *results, NSError *error) {
+                                                      for (ELRecord *record in results) {
+                                                          fprintf(stdout, "%s\n", [[NSString stringWithFormat:@"- %@ (%@)", [[record.properties dictionaryRepresentation] objectForKey:@"shortname"], record.identifier] UTF8String]);
+                                                      }
+                                                      [currentOperation considerThisOperationAsDone];
+                                                      exitStatus = EXIT_SUCCESS;
+                                                  }];
+        }
+                                                          withCancelationHandler:^(ELAsyncBlockToManageAsOperation *currentOperation) {
+                                                              exitStatus = EXIT_FAILURE;
+                                                          }
+                                                                     andUserInfo:nil] waitUntilFinished];
+        
+    }
+    
+    return exitStatus;
+}
+
+- (int)runReadAction {
+    __block int exitStatus = EXIT_FAILURE;
     
     NSArray *recordTypes = nil;
     
@@ -100,34 +147,44 @@
     
     for (NSString *recordType in recordTypes) {
         fprintf(stdout, "Record of type: %s\n", [recordType UTF8String]);
-        [[ELAsyncBlockToManageAsOperation runOnSharedQueueOperationWithAsyncTask:^(ELAsyncBlockToManageAsOperation *currentOperation) {
-            [[ELCachingDBProxy sharedInstance] getAllRegisteredRecordsOfType:recordType
-                                                      withAttributesToReturn:@[
-                                                                               @"shortname",
-                                                                               @"uuid",
-                                                                               ]
-                                                        andCompletionHandler:^(NSArray<NSDictionary *> *results, NSError *error) {
-                                                            for (NSDictionary *record in results) {
-                                                                fprintf(stdout, "%s\n", [[NSString stringWithFormat:@"- %@ (%@)", [record objectForKey:@"shortname"], [record objectForKey:@"uuid"]] UTF8String]);
-                                                            }
-                                                            [currentOperation considerThisOperationAsDone];
-                                                        }];
-        }
-                                                          withCancelationHandler:^(ELAsyncBlockToManageAsOperation *currentOperation) {
-                                                              
+        if (self.recordUUID) {
+            [[ELAsyncBlockToManageAsOperation runOnSharedQueueOperationWithAsyncTask:^(ELAsyncBlockToManageAsOperation *currentOperation) {
+                [[[self providerClass] sharedInstance] getRecordOfType:recordType
+                                                              withUUID:self.recordUUID
+                                                  andCompletionHandler:^(ELRecord *record, NSError *error) {
+                                                      fprintf(stdout, "%s\n", [[NSString stringWithFormat:@"- %@", [record description]] UTF8String]);
+                                                  }];
+                [currentOperation considerThisOperationAsDone];
+                exitStatus = EXIT_SUCCESS;
+            }
+                                                              withCancelationHandler:^(ELAsyncBlockToManageAsOperation *currentOperation) {
+                                                                  exitStatus = EXIT_FAILURE;
+                                                              }
+                                                                         andUserInfo:nil] waitUntilFinished];
+        } else {
+            [[ELAsyncBlockToManageAsOperation runOnSharedQueueOperationWithAsyncTask:^(ELAsyncBlockToManageAsOperation *currentOperation) {
+                [[[self providerClass] sharedInstance] getAllRecordsOfType:recordType
+                                                      andCompletionHandler:^(NSArray<ELRecord*> *results, NSError *error) {
+                                                          for (ELRecord *record in results) {
+                                                              fprintf(stdout, "%s\n", [[NSString stringWithFormat:@"- %@", [record description]] UTF8String]);
                                                           }
-                                                                     andUserInfo:nil] waitUntilFinished];
+                                                          [currentOperation considerThisOperationAsDone];
+                                                          exitStatus = EXIT_SUCCESS;
+                                                      }];
+            }
+                                                              withCancelationHandler:^(ELAsyncBlockToManageAsOperation *currentOperation) {
+                                                                  exitStatus = EXIT_FAILURE;
+                                                              }
+                                                                         andUserInfo:nil] waitUntilFinished];
+            
+        }
         
     }
     
-    return EXIT_SUCCESS;
+    return exitStatus;
 }
 
-- (int)runReadAction{
-    return 0;
-}
-
-- (int)runForgetAction{
+- (int)runForgetAction {
     return 0;
 }
 
@@ -135,15 +192,20 @@
     FILE * __restrict output = helpAsError ? stderr : stdout;
     const char *command = getprogname();
     
-    fprintf(stderr, "usage: %s -action < list | read | forget > ...\n", command);
+    fprintf(stderr, "usage: %s -source < local | cloud > -action < list | read | forget > ...\n", command);
+    fprintf(output, "\n");
+    
+    fprintf(stderr, "%s -source < local | cloud >\n", command);
+    fprintf(stderr, "\tSelect the source to use, local for cached data and cloud for server\n");
+    fprintf(stderr, "\tIf not specified, local is used\n");
     fprintf(output, "\n");
     
     fprintf(stderr, "%s -action list\n", command);
-    fprintf(stderr, "\tList records available locally\n");
+    fprintf(stderr, "\tList records available on the selected source\n");
     fprintf(output, "\n");
     
     fprintf(stderr, "%s -action list -recordType user\n", command);
-    fprintf(stderr, "\tList users available locally\n");
+    fprintf(stderr, "\tList users available on the selected source\n");
     fprintf(stderr, "\t(supported type are user and group)\n");
     fprintf(output, "\n");
     
@@ -154,16 +216,19 @@
     
     fprintf(stderr, "%s -action forget\n", command);
     fprintf(stderr, "\tWipe all records from local system\n");
+    fprintf(stderr, "\tAvailable only for local sources\n");
     fprintf(stderr, "\t(Will come back on next sync if still assigned to device identity)\n");
     fprintf(output, "\n");
     
     fprintf(stderr, "%s -action forget -recordType user\n", command);
     fprintf(stderr, "\tWipe all records of specified type from local system\n");
+    fprintf(stderr, "\tAvailable only for local sources\n");
     fprintf(stderr, "\t(Will come back on next sync if still assigned to device identity)\n");
     fprintf(output, "\n");
     
     fprintf(stderr, "%s -action forget -recordType user -recordUUID uuid\n", command);
     fprintf(stderr, "\tWipe specific record from local system\n");
+    fprintf(stderr, "\tAvailable only for local sources\n");
     fprintf(stderr, "\t(Will come back on next sync if still assigned to device identity)\n");
     fprintf(output, "\n");
 }
