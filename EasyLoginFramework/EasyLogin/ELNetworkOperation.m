@@ -262,15 +262,15 @@
 
 #pragma mark - NSURLSession Delegate Methods
 
-- (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
-{
-#warning INSECURE CREDENTIAL USAGE, ACCEPTS ANY CERTIFICATES! You can override this method to implement any specific authentication requirements.
-    // AH: this implementation allows unrecognized certificates as, when in development, the server did not have trusted signed certificates.
-    // It allows *any* certificate, even insecure ones! so beware!!!
-    // TODO: we should use certificate pinning or something like that to secure this correctly.
-    // Can typically be overriden in subclasses to handle specific authentication requirements.
-    completionHandler(NSURLSessionAuthChallengeUseCredential, [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]);
-}
+//- (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
+//{
+//#warning INSECURE CREDENTIAL USAGE, ACCEPTS ANY CERTIFICATES! You can override this method to implement any specific authentication requirements.
+//    // AH: this implementation allows unrecognized certificates as, when in development, the server did not have trusted signed certificates.
+//    // It allows *any* certificate, even insecure ones! so beware!!!
+//    // TODO: we should use certificate pinning or something like that to secure this correctly.
+//    // Can typically be overriden in subclasses to handle specific authentication requirements.
+//    completionHandler(NSURLSessionAuthChallengeUseCredential, [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]);
+//}
 
 -(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
 {
