@@ -112,7 +112,7 @@
     NSMutableDictionary *keptProperties = [NSMutableDictionary dictionary];
     NSDictionary *otherPropertiesDictionary = [otherProperties dictionaryRepresentation];
     
-    // entries added not in otherProperties or different is otherProperties
+    // entries added not in otherProperties or different in otherProperties
     [_internalDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull value, BOOL * _Nonnull stop) {
         id otherValue = otherPropertiesDictionary[key];
         if(otherValue == nil) {
