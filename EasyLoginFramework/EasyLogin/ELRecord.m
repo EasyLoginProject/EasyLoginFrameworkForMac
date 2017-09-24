@@ -18,7 +18,11 @@
 
 @implementation ELRecord
 {
-    NSString * _identifier;
+    NSString * _identifier; // cached for performance
+    
+    NSDate* _creationDate;
+    NSDate* _modificationDate;
+    NSDate* _deactivationDate;
 }
 
 +(BOOL)supportsSecureCoding
@@ -34,6 +38,9 @@
         _properties = [aDecoder decodeObjectOfClass:[ELRecordProperties class] forKey:@"properties"];
         _recordEntity = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"recordEntity"];
         _identifier = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"identifier"];
+        _creationDate = [aDecoder decodeObjectOfClass:[NSDate class] forKey:@"creationDate"];
+        _modificationDate = [aDecoder decodeObjectOfClass:[NSDate class] forKey:@"modificationDate"];
+        _deactivationDate = [aDecoder decodeObjectOfClass:[NSDate class] forKey:@"deactivationDate"];
     }
     
     return self;
@@ -45,6 +52,10 @@
     [aCoder encodeObject:_properties forKey:@"properties"];
     [aCoder encodeObject:_recordEntity forKey:@"recordEntity"];
     [aCoder encodeObject:_identifier forKey:@"identifier"];
+    
+    [aCoder encodeObject:_creationDate forKey:@"creationDate"];
+    [aCoder encodeObject:_modificationDate forKey:@"modificationDate"];
+    [aCoder encodeObject:_deactivationDate forKey:@"deactivationDate"];
 }
 
 
@@ -63,6 +74,12 @@
         if(!_identifier) {
             _identifier = [[NSUUID UUID] UUIDString];
         }
+        _creationDate = [_properties objectForKey:@"creationDate"];
+        if(!_creationDate) {
+            _creationDate = [[NSDate alloc] init];
+        }
+        _modificationDate = [_properties objectForKey:@"modificationDate"]; // can be nil
+        _deactivationDate = [_properties objectForKey:@"deactivationDate"]; // can be nil
     }
     
     return self;
@@ -104,6 +121,21 @@
     return _identifier;
 }
 
+-(nonnull NSDate *)creationDate
+{
+    return _creationDate;
+}
+
+-(nullable NSDate *)modificationDate
+{
+    return _modificationDate;
+}
+
+-(nullable NSDate *)deactivationDate
+{
+    return _deactivationDate; // AH: currently there is no way to deactivate a record so this is never set!
+}
+
 -(NSDictionary*)dictionaryRepresentation; // should be NSPropertyListSerialization compatible.
 //See how could we embed the entity ?? recordEntity is embedded in the returned dictionary with key: "CDS_recordEntity"
 {
@@ -114,8 +146,6 @@
     //study that:  dictionaryRepresentation[@"CDS_recordEntity"] = self.recordEntity;
     
     //return [NSDictionary dictionaryWithDictionary:dictionaryRepresentation];
-    
-    
     
     return [self.properties dictionaryRepresentation];
 }
@@ -138,6 +168,7 @@
 -(void)updateWithProperties:(nonnull ELRecordProperties*)updatedProperties deletes:(BOOL)deleteWhenAbsent
 {
     [self.properties updateWithProperties:updatedProperties deletes:deleteWhenAbsent kvoNotifier:self];
+    _modificationDate = [NSDate date];
 }
 #endif
 

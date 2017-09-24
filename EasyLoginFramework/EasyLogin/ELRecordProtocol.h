@@ -23,6 +23,10 @@
 
 -(nonnull NSString*)recordEntity; // default to value of key 'type' in dictionary. Fallback to class name, should match the managedObjectEntity. nonatomic
 -(nonnull NSString*)identifier; // fetch value of key returned by class method 'objectIdentifierKey'
+-(nonnull NSDate*)creationDate;
+-(nullable NSDate*)modificationDate;
+-(nullable NSDate*)deactivationDate;
+
 @property(strong, readonly, nonatomic, nonnull) ELRecordProperties *properties;
 
 -(nonnull NSDictionary*)dictionaryRepresentation; // should be NSPropertyListSerialization compatible.
