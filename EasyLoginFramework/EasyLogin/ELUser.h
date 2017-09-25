@@ -8,6 +8,7 @@
 
 #import "ELRecord.h"
 
+// todo : change to kELXX extern const instead of #define
 // For explanation about those keys, see https://github.com/EasyLoginProject/EasyLoginSpecs/blob/master/Abstract/UserRecords.md
 #define kELUserGivenNameKey @"givenName" // "Brigitte"
 #define kELUserSurnameKey @"surname" // "Macron"
