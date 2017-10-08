@@ -98,7 +98,7 @@
 				TargetAttributes = {
 					F87E22371EE8760A00CB14A0 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = JXHB9UP6QZ;
+						DevelopmentTeam = QGS2L9578J;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -255,7 +255,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = JXHB9UP6QZ;
+				DEVELOPMENT_TEAM = QGS2L9578J;
 				INFOPLIST_FILE = EasyLoginDB/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = io.easylogin.EasyLoginDB;
@@ -270,7 +270,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = JXHB9UP6QZ;
+				DEVELOPMENT_TEAM = QGS2L9578J;
 				INFOPLIST_FILE = EasyLoginDB/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = io.easylogin.EasyLoginDB;
