@@ -198,7 +198,7 @@
             if(completionBlock) completionBlock(record, nil);
         }
         else {
-            if(completionBlock) completionBlock(NO, op.error);
+            if(completionBlock) completionBlock(nil, op.error);
         }
     }];
     [_connector enqueueOperation:op];    
